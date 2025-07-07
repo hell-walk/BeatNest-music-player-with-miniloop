@@ -1,0 +1,47 @@
+{
+  "honey_singh": [
+    { "title": "Angrezi Beat", "file": "music/honey_singh/angrezi_beat-honey_singh.mp3" },
+    { "title": "Breakup Party", "file": "music/honey_singh/breakup_party-honey_singh.mp3" },
+    { "title": "Dope Shope", "file": "music/honey_singh/dope_shope-honey_singh.mp3" },
+    { "title": "High Heels", "file": "music/honey_singh/high_heels-honey_singh.mp3" },
+    { "title": "Hip Hop", "file": "music/honey_singh/ise_kehte_hai_hip_hop-honey_singh.mp3" },
+    { "title": "Proper Patola", "file": "music/honey_singh/proper_patola-diljit_dosanj.mp3" },
+    { "title": "Yaar Bathere", "file": "music/honey_singh/yaar_bathere-honey_singh.mp3" }
+  ],
+  "just_by_me": [
+    { "title": "Death Bed", "file": "music/just_by_me/death_bed-powfu_beabadoobee.mp3" },
+    { "title": "Die With a Smile", "file": "music/just_by_me/die_with_a_smile-lady_gaga_bruno_mars.mp3" },
+    { "title": "It's You", "file": "music/just_by_me/its_you_and_muskurane_ki_wajah.mp3" },
+    { "title": "No Surprises", "file": "music/just_by_me/no_surprises-radiohead.mp3" }
+  ],
+  "old_rizz": [
+    { "title": "Bheegi Bheegi Raaton Mein", "file": "music/old_rizz/bheegi_bheegi_raatonn_me.mp3" },
+    { "title": "Chingari Koi Bhadke", "file": "music/old_rizz/chingari_koi_bhadke.mp3" },
+    { "title": "Hotho Se Chulo Tum", "file": "music/old_rizz/hotho_se_chulo_tum-jagjit_singh.mp3" },
+    { "title": "Itna Na Mujhse Tu Pyaar", "file": "music/old_rizz/itna_na_mujhse_tu_pyaar_badha.mp3" }
+  ],
+  "rock_a_baby": [
+    { "title": "21 Guns", "file": "music/rock_a_baby/21_guns-green_days.mp3" },
+    { "title": "Back in Black", "file": "music/rock_a_baby/back_in_black-ac_dc.mp3" },
+    { "title": "Come As You Are", "file": "music/rock_a_baby/come_as_you_are-nirvana.mp3" },
+    { "title": "Highway to Hell", "file": "music/rock_a_baby/highway_to_hell-ac_dc.mp3" },
+    { "title": "Kingdom", "file": "music/rock_a_baby/kingdom-downstrait.mp3" },
+    { "title": "Sucker for Pain", "file": "music/rock_a_baby/sucker_of_pain-many_artists.mp3" },
+    { "title": "The Emptiness Machine", "file": "music/rock_a_baby/the_emptiness_machine-linkin_park.mp3" }
+  ],
+  "seedhe_maut": [
+    { "title": "11K", "file": "music/seedhe_maut/11k-seedhe_maut.mp3" },
+    { "title": "Akatsuki", "file": "music/seedhe_maut/akatsuki-seedhe_maut_raga.mp3" },
+    { "title": "Bure Din", "file": "music/seedhe_maut/bure_din-seedhe_maut.mp3" },
+    { "title": "Champion", "file": "music/seedhe_maut/champion-seedhe_maut.mp3" },
+    { "title": "Luka Chippi", "file": "music/seedhe_maut/luka_chippi-seedhe_maut.mp3" },
+    { "title": "Nalla Freestyle", "file": "music/seedhe_maut/nalla_freestyle-seedhe_maut.mp3" },
+    { "title": "Namastute", "file": "music/seedhe_maut/namastute-seedhe_maut.mp3" }
+  ],
+  "soft_mix": [
+    { "title": "Agar Tum Sath Ho", "file": "music/soft_mix/agar_tum_sath_ho-arijit_kumar.mp3" },
+    { "title": "Chandhan Me", "file": "music/soft_mix/chandhan_me-kailash_kher.mp3" },
+    { "title": "Saiyaan", "file": "music/soft_mix/saiyaan-kailash_kher.mp3" },
+    { "title": "Sazish", "file": "music/soft_mix/sazish-bhuvan_bam.mp3" }
+  ]
+}

@@ -1,0 +1,469 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Bitcount Grid Double", system-ui;
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
+.left {
+    width: 21vw;
+    padding: 10px;
+}
+
+.right {
+    width: 75vw;
+}
+
+.home {
+    padding: 3px;
+}
+
+.home ul li {
+    list-style: none;
+    width: 14px;
+    display: flex;
+    gap: 15px;
+    padding-top: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.home ul li img {
+    width: 20px;
+    height: 20px;
+    transition: filter 0.2s ease;
+}
+
+.home ul li p {
+    margin: 0;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.home ul li:hover {
+    background-color: #1a1a1a;
+    border-radius: 6px;
+}
+
+.home ul li:hover p {
+    color: white;
+}
+
+.home ul li:hover img {
+    filter: brightness(1.4);
+}
+
+.library {
+    padding: 3px;
+    display: flex;
+    flex-direction: column;
+    font-weight: 200;
+    gap: 10px;
+    min-height: 60vh;
+    position: relative;
+    max-height: 60vh;
+    overflow: hidden;
+}
+
+.library h1 {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+    color: #b3b3b3;
+    padding-bottom: 10px;
+}
+
+.library-section {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #444 #111;
+    padding-right: 5px;
+}
+
+.library-section::-webkit-scrollbar {
+    width: 6px;
+}
+
+.library-section::-webkit-scrollbar-thumb {
+    background-color: #444;
+    border-radius: 4px;
+}
+
+.library-section::-webkit-scrollbar-track {
+    background-color: #111;
+}
+
+.library-section h1,
+.queue-section h1 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  position: sticky;
+  top: 0;
+  background-color: #121212 ; /* Match the background */
+  z-index: 10;
+  padding: 10px 0;
+}
+
+
+#audioList,
+#queueList {
+    list-style-type: none;
+    padding-left: 20px;
+    font-family: "Bitcount Grid Double", monospace;
+    font-size: 14px;
+    color: whitesmoke;
+    font-weight: 500;
+}
+#audioList h2 {
+  position: sticky;
+  top: 30px; /* Pushes it below 'Your Library' heading */
+  background-color: #121212;
+  z-index: 10;
+  padding: 10px 0;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #444;
+}
+
+
+#audioList li,
+#queueList li {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background-color: #111;
+    border-radius: 3px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+
+#audioList li:hover,
+#queueList li:hover {
+    background-color: #4c504e;
+    color: whitesmoke;
+    font-weight: 300;
+    transform: scale(1.02);
+}
+
+.footer {
+    display: flex;
+    font-size: 12px;
+    gap: 15px;
+    position: relative;
+    bottom: 0;
+}
+
+.footer a {
+    color: gray;
+}
+
+.navigation {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navigation ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.navigation ul li a {
+    text-decoration: none;
+    color: whitesmoke;
+    padding: 8px 12px;
+    display: inline-block;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.navigation ul li a:hover {
+    background-color: #1a1a1a;
+    border: 1px solid white;
+    color: white;
+}
+
+.playlist {
+    padding: 7px;
+    margin: 0px;
+}
+
+.playlist h1 {
+    margin-top: 14px;
+}
+
+.cardcontainer {
+  margin-top: 30px;
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 20px 10px;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.cardcontainer::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+
+.cardcontainer::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+.cardcontainer::-webkit-scrollbar-track {
+    background: #111;
+}
+
+.card {
+    flex-shrink: 0;
+    background-color: #111;
+    border-radius: 8px;
+    padding: 10px;
+    color: white;
+    text-align: center;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.card:hover {
+    background-color: #282828;
+}
+
+.img-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.main-img {
+    width: 174px;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 6px;
+    transition: transform 0.3s ease;
+}
+
+.card:hover .main-img {
+    transform: scale(1.05);
+}
+
+.hover-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 45px;
+    height: 45px;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover .hover-img {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.card h2 {
+    margin: 10px 0 5px;
+    font-size: 16px;
+    margin-top: 15px;
+    transition: color 0.3s ease;
+}
+
+.card h2:hover {
+    color: #4c504e;
+    cursor: pointer;
+}
+
+.card p {
+    color: #b3b3b3;
+    font-size: 14px;
+}
+
+.lastcontainer {
+    display: grid;
+    grid-template-columns: 20vw 1fr;
+    gap: 10px;
+    padding: 10px;
+}
+
+.playbar {
+      position: fixed;
+      bottom: 0;
+      left: 361px;
+      width: 71%;
+      background-color: #1a1a1a;
+      color: white;
+      padding: 10px 30px;
+      z-index: 1000;
+      border-top: 1px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+.songbutton img {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+}
+.song-item.active,
+#queueList li.active {
+  background-color: whitesmoke;
+  color: rgb(58, 125, 118);
+  padding: 2px;
+  font-weight: bold;
+  transform: scale(1.02);
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+}
+
+
+
+#playBtn.active {
+  filter: brightness(2);
+  background-color: #4c504e;
+  border-radius: 50%;
+  padding: 1px;
+  transition: all 0.2s ease;
+}
+
+#playBtn:hover {
+  background-color: #252726;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.library-queue {
+    display: flex;
+    flex-direction: column;
+    height: 55vh;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.library-section,
+.queue-section {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.library-section h1,
+.queue-section h1 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.song-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.song-list li {
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: #1e1e1e;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: monospace;
+}
+
+.song-list li:hover {
+    background-color: #333;
+}
+
+.divider {
+    border: none;
+    height: 1px;
+    background-color: #444;
+    margin: 10px 0;
+}
+
+#queueList li {
+    color: #ccc;
+}
+
+.center.right {
+    max-height: 60vh;
+    /* Reduced from 60vh to eliminate vertical scroll */
+    overflow-y: hidden;
+}
+
+/* === Style for Volume & Seekbar === */
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 20px;
+}
+
+.volume-control input[type="range"] {
+  width: 100px;
+  cursor: pointer;
+  accent-color: white;
+  background: transparent;
+}
+
+.seekbar {
+  width: 100%;
+  height: 4px;
+  background-color: #555;
+  border-radius: 2px;
+  cursor: pointer;
+  margin: 8px 0;
+}
+
+.seekbar-filled {
+  height: 100%;
+  background-color: white;
+  border-radius: 2px;
+  width: 0%;
+  /* Remove the transition line */
+}
+
+
+.song-item.active,
+#queueList li.active {
+  background-color: #3a3a3a;
+  color: rgb(58, 125, 118);
+  font-weight: bold;
+  
+  transition: all 0.3s ease;
+}
+
+    .maincontainer {
+      padding-bottom: 80px;
+    }
+
+    .songbuttons img {
+      width: 24px;
+      height: 24px;
+      margin: 0 8px;
+      cursor: pointer;
+    }
+
+    #loopBtn.active,
+    #shuffleBtn.active {
+      filter: brightness(2);
+      background-color: #4c504e;
+      border-radius: 50%;
+      padding: 1px;
+      transition: all 0.2s ease;
+    }

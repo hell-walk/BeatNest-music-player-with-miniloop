@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BeatNest-Music Player</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/utility.css" />
+</head>
+
+<body>
+  <header>
+    <div class="container flex bg-black">
+      <div class="left m-1 rounded p-1">
+        <div class="home m-1 rounded p-1">
+          <div class="logo">
+            <img src="svg/logo.svg" alt="logo" />
+          </div>
+          <ul>
+            <li>
+              <img src="svg/home.svg" class="inverted" alt="home" />
+              <p>Home</p>
+            </li>
+            <li>
+              <img src="svg/search.svg" class="inverted" alt="search" />
+              <p>Search</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="right">
+        <nav class="navigation m-1 p-1 rounded">
+          <ul>
+            <li><a href="htmlwaste/login/l.html" target="_blank">Login</a></li>
+            <li><a href="htmlwaste/sign up/s.html" target="_blank">Signup</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="maincontainer flex">
+      <!-- Left Sidebar -->
+      <div class="lib">
+        <div class="library-queue left bg-gray rounded m-1">
+          <!-- Library Section -->
+          <div class="library-section">
+            <h1>Your Library</h1>
+            <ul id="audioList" class="song-list mt-2"></ul>
+          </div>
+
+          <!-- Divider -->
+          <hr class="divider" />
+
+          <!-- Queue Section -->
+          <div class="queue-section">
+            <h1>Queue</h1>
+            <ul id="queueList" class="song-list mt-2"></ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Playlist Cards -->
+      <div class="center right bg-gray rounded m-1 p-1">
+        <div class="playlist right">
+          <h1>Playlists</h1>
+          <div class="cardcontainer">
+            <!-- 6 Playlist Cards -->
+            <div class="card" data-folder="honey_singh">
+              <div class="img-container">
+                <img src="https://i.scdn.co/image/ab67616d00001e02786a26c64ff6b997a9552910" alt="Cover" class="main-img" />
+                <img src="svg/play-button.svg" alt="Play" class="hover-img" />
+              </div>
+              <h2>Honey Singh</h2>
+              <p>Popular Punjabi Hits</p>
+            </div>
+
+            <div class="card" data-folder="just_by_me">
+              <div class="img-container">
+                <img src="https://i.scdn.co/image/ab67616d00001e02786a26c64ff6b997a9552910" alt="Cover" class="main-img" />
+                <img src="svg/play-button.svg" alt="Play" class="hover-img" />
+              </div>
+              <h2>Just For Me</h2>
+              <p>Little bit emo</p>
+            </div>
+
+            <div class="card" data-folder="old_rizz">
+              <div class="img-container">
+                <img src="https://i.scdn.co/image/ab67616d00001e02786a26c64ff6b997a9552910" alt="Cover" class="main-img" />
+                <img src="svg/play-button.svg" alt="Play" class="hover-img" />
+              </div>
+              <h2>Old Rizz</h2>
+              <p>Old School Love</p>
+            </div>
+
+            <div class="card" data-folder="rock_a_baby">
+              <div class="img-container">
+                <img src="https://i.scdn.co/image/ab67616d00001e02786a26c64ff6b997a9552910" alt="Cover" class="main-img" />
+                <img src="svg/play-button.svg" alt="Play" class="hover-img" />
+              </div>
+              <h2>Rock and Metal</h2>
+              <p>Enjoy popular rock songs</p>
+            </div>
+
+            <div class="card" data-folder="seedhe_maut">
+              <div class="img-container">
+                <img src="https://i.scdn.co/image/ab67616d00001e02786a26c64ff6b997a9552910" alt="Cover" class="main-img" />
+                <img src="svg/play-button.svg" alt="Play" class="hover-img" />
+              </div>
+              <h2>Seedhe Maut</h2>
+              <p>Enjoy Seedhe Maut</p>
+            </div>
+
+            <div class="card" data-folder="soft_mix">
+              <div class="img-container">
+                <img src="https://i.scdn.co/image/ab67616d00001e02786a26c64ff6b997a9552910" alt="Cover" class="main-img" />
+                <img src="svg/play-button.svg" alt="Play" class="hover-img" />
+              </div>
+              <h2>Soft Mix</h2>
+              <p>Songs that can have tear in your eyes</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer left bg-black rounded m-1">
+      <div class="footer-links">
+        <a href="https://www.spotify.com/in-en/legal/" target="_blank">Legal</a>
+        <a href="https://www.spotify.com/in-en/safetyandprivacy/" target="_blank">Safety & Privacy</a>
+        <a href="https://www.spotify.com/in-en/legal/privacy-policy/" target="_blank">Privacy Policy</a>
+        <a href="https://www.spotify.com/in-en/legal/cookies-policy/" target="_blank">Cookies</a>
+        <a href="https://www.spotify.com/in-en/legal/privacy-policy/#s3" target="_blank">About Ads</a>
+        <a href="https://www.spotify.com/in-en/accessibility/" target="_blank">Accessibility</a>
+      </div>
+    </div>
+
+    <div class="bar right">
+      <div class="playbar right rounded m-1 bg-gray">
+        <div class="seekbar" id="seekbar">
+      <div class="seekbar-filled" id="seekbar-filled"></div>
+    </div>
+        <div class="songtime">
+          <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
+        </div>
+        <div class="songbuttons">
+          <img id="prevBtn" src="svg/playbar/previous.svg" alt="Previous" />
+          <img id="playBtn" src="svg/playbar/pause.svg" alt="Play" />
+          <img id="nextBtn" src="svg/playbar/forward.svg" alt="Forward" />
+          <img id="shuffleBtn" src="svg/playbar/shuffle.svg" alt="Shuffle" />
+          <img id="loopBtn" src="svg/playbar/loop.svg" alt="Loop" />
+        </div>
+        <div class="volume-control">
+  <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1" />
+</div>
+        <div class="songinfo" id="songInfo"></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

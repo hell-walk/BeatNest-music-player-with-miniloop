@@ -1,0 +1,77 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #111;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.signup-container {
+  background-color: #222;
+  padding: 40px;
+  border-radius: 10px;
+  width: 350px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.signup-container h2 {
+  color: #f1c40f;
+  margin-bottom: 25px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.signup-container input,
+.signup-container select {
+  display: block;
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 6px;
+  background-color: #333;
+  color: white;
+  font-size: 14px;
+  font-family: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+
+.signup-container select {
+  appearance: none;
+  background-color: #333;
+}
+
+.signup-container button {
+  width: 100%;
+  padding: 10px;
+  background: #f1c40f;
+  border: none;
+  border-radius: 6px;
+  color: #111;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.signup-container button:hover {
+  background: #e2b607;
+}
+
+.signup-container a {
+  color: #f1c40f;
+  text-decoration: none;
+}
+
+.signup-container a:hover {
+  text-decoration: underline;
+}
