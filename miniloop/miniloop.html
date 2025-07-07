@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Loop - Be@tNest</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="miniloop.css" />
+</head>
+
+<body>
+  <div class="miniloop-box">
+    <h2>Select Songs for Mini Loop</h2>
+    <ul id="miniSongList" class="song-select-list"></ul>
+    <button class="add-btn" onclick="addMiniLoopSongs()">Add to Mini Queue</button>
+  </div>
+ <div id="miniLoopModal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Select Songs for Mini Loop</h2>
+    <ul id="miniLoopSongList" class="song-list"></ul>
+    <button id="addMiniLoopBtn">Add to Mini Loop</button>
+    <button id="closeMiniLoop">Close</button>
+  </div>
+</div>
+
+  <script src="miniloop.js"></script>
+</body>
+</html>
