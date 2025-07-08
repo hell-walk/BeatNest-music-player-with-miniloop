@@ -4,7 +4,9 @@ let shuffleQueue = [];
 let shuffleHistory = [];
 let currentSongIndex = 0;
 let currentPlaylist = [];
-const audio = new Audio();
+// const audio = new Audio();
+ let audio = new Audio();
+audio.loop = false;
 
 const audioList = document.getElementById("audioList");
 const seekbar = document.getElementById("seekbar");
@@ -93,12 +95,22 @@ function playSong(index) {
   const song = currentPlaylist[index];
   audio.src = song.file;
 
-  songInfo.textContent = song.title || "Unknown Song";
+  // ✅ Ensure loop setting is always reapplied
+  audio.loop = isLoop;
+
+  if (song.title) {
+    songInfo.style.display = "block";
+    songInfo.innerHTML = `<span class="scrolling-text">${song.title}</span>`;
+  } else {
+    songInfo.style.display = "none";
+  }
+
   playBtn.src = "svg/playbar/pause.svg";
   playBtn.classList.add("active");
 
   document.querySelectorAll("#audioList .song-item").forEach(item => item.classList.remove("active"));
   document.querySelector(`#audioList .song-item[data-index="${index}"]`)?.classList.add("active");
+
   document.querySelectorAll("#queueList .song-item").forEach(item => item.classList.remove("active"));
   document.querySelector(`#queueList .song-item[data-index="${index}"]`)?.classList.add("active");
 
@@ -147,7 +159,9 @@ volumeSlider.addEventListener("input", () => {
 });
 
 nextBtn.addEventListener("click", () => {
-  if (isShuffle) {
+  if (isLoop) {
+    playSong(currentSongIndex); // restart current song
+  } else if (isShuffle) {
     const pos = shuffleQueue.indexOf(currentSongIndex);
     let nextIndex = pos < shuffleQueue.length - 1 ? shuffleQueue[pos + 1] : shuffleQueue[0];
     playSong(nextIndex);
@@ -157,8 +171,11 @@ nextBtn.addEventListener("click", () => {
   }
 });
 
+
 prevBtn.addEventListener("click", () => {
-  if (isShuffle) {
+  if (isLoop) {
+    playSong(currentSongIndex); // restart current song
+  } else if (isShuffle) {
     const pos = shuffleQueue.indexOf(currentSongIndex);
     let prevIndex = pos > 0 ? shuffleQueue[pos - 1] : shuffleQueue[shuffleQueue.length - 1];
     playSong(prevIndex);
@@ -168,8 +185,12 @@ prevBtn.addEventListener("click", () => {
   }
 });
 
+
+
+
 loopBtn.addEventListener("click", () => {
   isLoop = !isLoop;
+  audio.loop = isLoop; // Actual audio looping
   loopBtn.classList.toggle("active", isLoop);
 });
 
@@ -196,17 +217,16 @@ shuffleBtn.addEventListener("click", () => {
 });
 
 audio.addEventListener("ended", () => {
-  if (isLoop) {
-    playSong(currentSongIndex);
+  if (isMiniLoopActive && miniLoopQueue.length > 0) {
+    playNextInMiniLoop();
   } else if (isShuffle) {
-    const pos = shuffleQueue.indexOf(currentSongIndex);
-    let nextIndex = pos < shuffleQueue.length - 1 ? shuffleQueue[pos + 1] : shuffleQueue[0];
-    playSong(nextIndex);
+    playNextShuffle();
   } else {
-    currentSongIndex = (currentSongIndex + 1) % currentPlaylist.length;
-    playSong(currentSongIndex);
+    playNextInQueue(); // or your normal next song function
   }
 });
+
+
 
 document.querySelectorAll(".card").forEach(card => {
   card.addEventListener("click", () => {
@@ -279,12 +299,14 @@ clearMiniLoopBtn.addEventListener("click", () => {
   audio.pause();
   audio.src = "";
   songInfo.textContent = "";
+  songInfo.style.display = "none";
   currentTimeSpan.textContent = "0:00";
   totalTimeSpan.textContent = "0:00";
   seekbarFilled.style.width = "0%";
   queueList.innerHTML = "";
   document.querySelectorAll(".song-item").forEach(item => item.classList.remove("active"));
 });
+
 // Clear Library Button
 document.getElementById("clearLibraryBtn").addEventListener("click", () => {
   document.getElementById("audioList").innerHTML = "<h2>Your Library</h2>";
@@ -293,6 +315,7 @@ document.getElementById("clearLibraryBtn").addEventListener("click", () => {
   audio.pause();
   audio.src = "";
   songInfo.textContent = "";
+  songInfo.style.display = "none";
   currentTimeSpan.textContent = "0:00";
   totalTimeSpan.textContent = "0:00";
   seekbarFilled.style.width = "0%";
@@ -303,20 +326,15 @@ document.getElementById("clearLibraryBtn").addEventListener("click", () => {
 document.getElementById("clearQueueBtn").addEventListener("click", () => {
   document.getElementById("queueList").innerHTML = "";
 });
-const toggleBtn = document.getElementById('themeToggleBtn');
 
+// ✅ Theme toggle fix
 const themeToggleBtn = document.getElementById("themeToggleBtn");
 themeToggleBtn.addEventListener("click", () => {
   document.body.classList.toggle("light-mode");
 
-  if (document.body.classList.contains("Dark-mode")) {
-    themeToggleBtn.textContent = " Dark Mode";
+  if (document.body.classList.contains("light-mode")) {
+    themeToggleBtn.textContent = "Dark Mode";
   } else {
-    themeToggleBtn.textContent = " Light Mode";
+    themeToggleBtn.textContent = "Light Mode";
   }
 });
-
-
-
-
-

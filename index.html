@@ -16,26 +16,26 @@
       <div class="left m-1 rounded p-1">
         <div class="home m-1 rounded p-1">
           <div class="logo">
-            <img src="svg/logo.svg" alt="logo" />
+            <img src="svg/logo.svg" class="invert-on-light" alt="logo" />
           </div>
           <ul>
             <li>
-              <img src="svg/home.svg" class="inverted" alt="home" />
+              <img src="svg/home.svg"  class="invert-on-light" alt="home" />
               <p>Home</p>
             </li>
             <li>
-              <img src="svg/search.svg" class="inverted" alt="search" />
+              <img src="svg/search.svg"  class="invert-on-light" alt="search" />
               <p>Search</p>
             </li>
           </ul>
-        </div>
+        </div> 
       </div>
       <div class="right">
         <nav class="navigation m-1 p-1 rounded">
           <ul>
             <li><a href="htmlwaste/login/l.html" >Login</a></li>
             <li><a href="htmlwaste/sign up/s.html" >Signup</a></li>
-            <button id="themeToggleBtn" class="theme-btn">Dark mode</button>
+            <button id="themeToggleBtn" class="theme-btn">Light mode</button>
             
 
 
@@ -140,7 +140,7 @@
   </main>
 
   <footer>
-    <div class="footer left bg-black rounded m-1">
+    <div class="footer flex left bg-black rounded m-1">
       <div class="footer-links">
         <a href="https://www.spotify.com/in-en/legal/" target="_blank">Legal</a>
         <a href="https://www.spotify.com/in-en/safetyandprivacy/" target="_blank">Safety & Privacy</a>
@@ -168,10 +168,14 @@
           <button id="miniLoopToggle" class="miniloop-btn">Mini Loop</button>
           <button id="clearMiniLoopBtn" class="miniloop-btn">Clear Mini Loop</button>
         </div>
-        <div class="volume-control">
+        <div class="songinfo" id="songInfo">
+  <span class="scrolling-text">Song Title</span>
+</div>
+<div class="volume-control">
   <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1" />
 </div>
-        <div class="songinfo" id="songInfo"></div>
+
+       
       </div>
     </div>
   </footer>
