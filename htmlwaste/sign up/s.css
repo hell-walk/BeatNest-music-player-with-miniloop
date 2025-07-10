@@ -1,6 +1,10 @@
 body {
   margin: 0;
   padding: 0;
+<<<<<<< HEAD
+=======
+  background: #0f0f0f;
+>>>>>>> 6af9fdd678c8185c4355429982a4474dc526996d
   font-family: Arial, sans-serif;
   color: white;
   display: flex;
@@ -53,9 +57,17 @@ body {
 
 /* Ensure signup container stays above background */
 .signup-container {
+<<<<<<< HEAD
   padding: 40px;
   border-radius: 10px;
   width: 320px;
+=======
+  background-color: #000000;
+  padding: 40px;
+  border-radius: 10px;
+  width: 320px;
+  box-shadow: 0 0 15px #22c5bc;
+>>>>>>> 6af9fdd678c8185c4355429982a4474dc526996d
   text-align: center;
   color: white; /* Ensured all text defaults to white */
   opacity: 0;
@@ -75,7 +87,11 @@ body {
 }
 
 .signup-container h2 {
+<<<<<<< HEAD
   color: white; /* Changed from #FAF9F6 to white for consistency */
+=======
+  color: #2BFCF2;
+>>>>>>> 6af9fdd678c8185c4355429982a4474dc526996d
   margin-bottom: 25px;
 }
 
@@ -106,24 +122,39 @@ body {
 }
 
 .signup-container button {
-  width: 100%;
+   width: 100%;
   padding: 10px;
+<<<<<<< HEAD
   background: none;
   border: 2px solid #FAF9F6; /* Fixed border syntax and set to off-white */
   border-radius: 6px;
   color: white; /* Ensured button text is white */
+=======
+  background: #2BFCF5;
+  border: none;
+  border-radius: 6px;
+  color: white;
+>>>>>>> 6af9fdd678c8185c4355429982a4474dc526996d
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s;
 }
 
 .signup-container button:hover {
+<<<<<<< HEAD
   background: #FAF9F6;
   color: #333; /* Ensure text contrasts with background on hover */
 }
 
 .signup-container a {
   color: white; /* Changed from #FAF9F6 to white for consistency */
+=======
+   background: #2BFCF2;
+}
+
+.signup-container a {
+ color: #2BFCF2;
+>>>>>>> 6af9fdd678c8185c4355429982a4474dc526996d
   text-decoration: none;
 }
 
