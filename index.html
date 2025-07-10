@@ -8,23 +8,28 @@
   <link rel="icon" href="svg/logo.svg" type="image/png">
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/utility.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
 </head>
 
 <body>
+        <div class="stars"></div>
+        <div class="twinkling"></div> 
+       <div class="clouds"></div>
+       <div class="title"></div>
   <header>
-    <div class="container flex bg-black">
+    <div class="container flex">
       <div class="left m-1 rounded p-1">
         <div class="home m-1 rounded p-1">
           <div class="logo">
-            <img src="svg/logo.svg" class="invert-on-light" alt="logo" />
+            <img src="svg/logo.svg" class="invert-on-light"/>
           </div>
           <ul>
             <li>
-              <img src="svg/home.svg"  class="invert-on-light" alt="home" />
+              <img src="svg/home.svg"  class="invert-on-light" />
               <p>Home</p>
             </li>
             <li>
-              <img src="svg/search.svg"  class="invert-on-light" alt="search" />
+              <img src="svg/search.svg"  class="invert-on-light"  />
               <p>Search</p>
             </li>
           </ul>
@@ -35,10 +40,6 @@
           <ul>
             <li><a href="htmlwaste/login/l.html" target="_blank" >Login</a></li>
             <li><a href="htmlwaste/sign up/s.html" target="_blank" >Signup</a></li>
-            <button id="themeToggleBtn" class="theme-btn">Light mode</button>
-            
-
-
           </ul>
         </nav>
       </div>
@@ -49,7 +50,7 @@
     <div class="maincontainer flex">
       <!-- Left Sidebar -->
       <div class="lib">
-        <div class="library-queue left bg-gray rounded m-1">
+        <div class="library-queue left rounded m-1">
           <!-- Library Section -->
           <div class="library-section">
   <div class="flex-between">
@@ -74,15 +75,15 @@
       </div>
 
       <!-- Right Playlist Cards -->
-      <div class="center right bg-gray rounded m-1 p-1">
+      <div class="center right rounded m-1 p-1">
         <div class="playlist right">
           <h1>Playlists</h1>
           <div class="cardcontainer">
             <!-- 6 Playlist Cards -->
             <div class="card" data-folder="honey_singh">
               <div class="img-container">
-                <img src="https://i.scdn.co/image/ab67616d00001e02786a26c64ff6b997a9552910" alt="Cover" class="main-img" />
-                <img src="svg/play-button.svg" alt="Play" class="hover-img" />
+                <img src="images/Honey Singh.jpg"class="main-img" />
+                <img src="svg/play-button.svg"  class="hover-img" />
               </div>
               <h2>Honey Singh</h2>
               <p>Popular Punjabi Hits</p>
@@ -90,8 +91,8 @@
 
             <div class="card" data-folder="just_by_me">
               <div class="img-container">
-                <img src="https://i.scdn.co/image/ab67616d00001e02786a26c64ff6b997a9552910" alt="Cover" class="main-img" />
-                <img src="svg/play-button.svg" alt="Play" class="hover-img" />
+                <img src="images/just for me.jpg"  class="main-img" />
+                <img src="svg/play-button.svg" class="hover-img" />
               </div>
               <h2>Just For Me</h2>
               <p>Little bit emo</p>
@@ -99,8 +100,8 @@
 
             <div class="card" data-folder="old_rizz">
               <div class="img-container">
-                <img src="https://i.scdn.co/image/ab67616d00001e02786a26c64ff6b997a9552910" alt="Cover" class="main-img" />
-                <img src="svg/play-button.svg" alt="Play" class="hover-img" />
+                <img src="images/Old Rizz.jpg" class="main-img" />
+                <img src="svg/play-button.svg" class="hover-img" />
               </div>
               <h2>Old Rizz</h2>
               <p>Old School Love</p>
@@ -108,8 +109,8 @@
 
             <div class="card" data-folder="rock_a_baby">
               <div class="img-container">
-                <img src="https://i.scdn.co/image/ab67616d00001e02786a26c64ff6b997a9552910" alt="Cover" class="main-img" />
-                <img src="svg/play-button.svg" alt="Play" class="hover-img" />
+                <img src="images/Rock and Metal.jpg" class="main-img" crossorigin="anonymous" />
+                <img src="svg/play-button.svg" class="hover-img" />
               </div>
               <h2>Rock and Metal</h2>
               <p>Enjoy popular rock songs</p>
@@ -117,8 +118,8 @@
 
             <div class="card" data-folder="seedhe_maut">
               <div class="img-container">
-                <img src="https://i.scdn.co/image/ab67616d00001e02786a26c64ff6b997a9552910" alt="Cover" class="main-img" />
-                <img src="svg/play-button.svg" alt="Play" class="hover-img" />
+                <img src="images/seedhe maut.jpg"  class="main-img" />
+                <img src="svg/play-button.svg" class="hover-img" />
               </div>
               <h2>Seedhe Maut</h2>
               <p>Enjoy Seedhe Maut</p>
@@ -126,8 +127,8 @@
 
             <div class="card" data-folder="soft_mix">
               <div class="img-container">
-                <img src="https://i.scdn.co/image/ab67616d00001e02786a26c64ff6b997a9552910" alt="Cover" class="main-img" />
-                <img src="svg/play-button.svg" alt="Play" class="hover-img" />
+                <img src="images/Soft Mix.jpg"  class="main-img" />
+                <img src="svg/play-button.svg"  class="hover-img" />
               </div>
               <h2>Soft Mix</h2>
               <p>Songs that can have tear in your eyes</p>
@@ -140,7 +141,7 @@
   </main>
 
   <footer>
-    <div class="footer flex left bg-black rounded m-1">
+    <div class="footer flex left rounded m-1">
       <div class="footer-links">
         <a href="https://www.spotify.com/in-en/legal/" target="_blank">Legal</a>
         <a href="https://www.spotify.com/in-en/safetyandprivacy/" target="_blank">Safety & Privacy</a>
@@ -152,7 +153,7 @@
     </div>
 
     <div class="bar right">
-      <div class="playbar right rounded m-1 bg-gray">
+      <div class="playbar right rounded m-1">
         <div class="seekbar" id="seekbar">
       <div class="seekbar-filled" id="seekbar-filled"></div>
     </div>
@@ -160,11 +161,11 @@
           <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
         </div>
         <div class="songbuttons">
-          <img id="prevBtn" src="svg/playbar/previous.svg" alt="Previous" />
-          <img id="playBtn" src="svg/playbar/pause.svg" alt="Play" />
-          <img id="nextBtn" src="svg/playbar/forward.svg" alt="Forward" />
-          <img id="shuffleBtn" src="svg/playbar/shuffle.svg" alt="Shuffle" />
-          <img id="loopBtn" src="svg/playbar/loop.svg" alt="Loop" />
+          <img id="prevBtn" src="svg/playbar/previous.svg"  class="inverted"  />
+          <img id="playBtn" src="svg/playbar/pause.svg" class="inverted"  />
+          <img id="nextBtn" src="svg/playbar/forward.svg" class="inverted" />
+          <img id="shuffleBtn" src="svg/playbar/shuffle.svg" class="inverted" />
+          <img id="loopBtn" src="svg/playbar/loop.svg" class="inverted" />
           <button id="miniLoopToggle" class="miniloop-btn">Mini Loop</button>
           <button id="clearMiniLoopBtn" class="miniloop-btn">Clear Mini Loop</button>
         </div>
@@ -190,6 +191,7 @@
   </div>
 </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
   <script src="script.js"></script>
 </body>
 

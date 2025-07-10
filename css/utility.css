@@ -15,14 +15,14 @@
 .inverted{
     filter: invert(1);
 }
-.bg-black{
-     background-color:black; /*change afterwards */
+/* .bg-black{
+     background-color:black;
     color: aliceblue;
 }
 .bg-gray{
-     background-color: #121212; /*change afterwards */
+     background-color: #121212; 
     color: aliceblue;
-}
+} */
 .rounded{
     border-radius: 7px;
 }

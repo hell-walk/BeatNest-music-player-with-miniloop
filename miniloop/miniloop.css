@@ -1,35 +1,48 @@
-/* Shared style for modal buttons */
-.modal-content button {
-  padding: 10px 16px;
-  margin: 8px 6px 0 0;
-  background-color: #1e1e1e;
-  color: #fff;
-  border: 1px solid #555;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Bitcount Grid Double", system-ui;
+}
+
+/* Miniloop box */
+.miniloop-box {
+  background-color: var(--card-bg);
+  padding: 15px;
+  border-radius: 8px;
+  margin: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s forwards;
+  color: var(--text-color);
+}
+
+.miniloop-box h2 {
+  margin: 0 0 10px;
+  font-size: 1.1rem;
+  color: var(--highlight-color);
+}
+
+.miniloop-box ul {
+  list-style: none;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.miniloop-box li {
+  padding: 8px 10px;
+  border-bottom: 1px solid #333;
+  transition: background-color 0.3s ease;
+}
+
+.miniloop-box li:hover {
+  background-color: var(--highlight-color);
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
-/* Hover effect */
-.modal-content button:hover {
-  background-color: #2a2a2a;
-  border-color: #1db954; /* green accent */
-  color: #1db954;
-  box-shadow: 0 0 8px rgba(29, 185, 84, 0.4);
-}
-
-/* Optional: active/focus styles */
-.modal-content button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px #1db95455;
-}
-
-.modal-content button:active {
-  transform: scale(0.97);
-}
-.modal {
+/* Modal */
+#miniLoopModal.modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -40,29 +53,119 @@
   align-items: center;
   justify-content: center;
   z-index: 1001;
+  opacity: 0;
+  animation: fadeInScale 0.5s forwards;
 }
 
-.modal.hidden {
+#miniLoopModal.hidden {
   display: none;
 }
 
-.modal-content {
-  background-color: #111;
-  color: white;
+#miniLoopModal .modal-content {
+  background-color: var(--card-bg);
+  color: var(--text-color);
   padding: 20px;
   border-radius: 10px;
   max-height: 70vh;
   overflow-y: auto;
   width: 400px;
+  transform: scale(0.9);
+  animation: fadeInScale 0.5s forwards;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-.modal-content ul {
+#miniLoopModal .modal-content h2 {
+  margin: 0 0 15px;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+#miniLoopModal .modal-content ul {
   list-style: none;
   padding: 0;
-  margin: 15px 0;
+  margin: 0 0 20px;
 }
 
-.modal-content li {
-  padding: 8px;
+#miniLoopModal .modal-content li {
+  padding: 10px;
   border-bottom: 1px solid #333;
+  transition: background-color 0.3s ease;
+}
+
+#miniLoopModal .modal-content li:hover {
+  background-color: var(--highlight-color);
+  cursor: pointer;
+}
+
+/* Buttons */
+#miniLoopModal .modal-content button,
+.miniloop-box .add-btn {
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: 2px solid #1db954;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: scale(1);
+}
+
+#miniLoopModal .modal-content button:hover,
+.miniloop-box .add-btn:hover {
+  animation: buttonHover 0.3s forwards;
+  background-color: #2a2a2a;
+  border-color: #1ed760;
+  box-shadow: 0 0 10px rgba(29, 183, 84, 0.5);
+}
+
+@keyframes buttonHover {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
+#miniLoopModal .modal-content button:not(:hover),
+.miniloop-box .add-btn:not(:hover) {
+  transform: scale(1);
+  transition: transform 0.3s ease;
+}
+
+#miniLoopModal .modal-content button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.3);
+}
+
+#miniLoopModal .modal-content button:active {
+  transform: scale(0.97);
+  animation: none;
+}
+
+/* Animations */
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Theme adjustments */
+body.light-mode #miniLoopModal .modal-content {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+
+body.light-mode #miniLoopModal .modal-content button,
+body.light-mode .miniloop-box .add-btn {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+body.light-mode #miniLoopModal .modal-content li:hover,
+body.light-mode .miniloop-box li:hover {
+  background-color: var(--highlight-color);
 }

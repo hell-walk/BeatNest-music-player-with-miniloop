@@ -1,11 +1,10 @@
-// Fully Updated script.js with Mini Loop Support and Clear Button in Playbar
-
 let shuffleQueue = [];
 let shuffleHistory = [];
 let currentSongIndex = 0;
 let currentPlaylist = [];
-// const audio = new Audio();
- let audio = new Audio();
+let isMiniLoopActive = false;
+let miniLoopQueue = [];
+let audio = new Audio();
 audio.loop = false;
 
 const audioList = document.getElementById("audioList");
@@ -23,6 +22,10 @@ const queueList = document.getElementById("queueList");
 const songInfo = document.getElementById("songInfo");
 const miniLoopBtn = document.getElementById("miniLoopToggle");
 const clearMiniLoopBtn = document.getElementById("clearMiniLoopBtn");
+const miniLoopModal = document.getElementById("miniLoopModal");
+const miniLoopSongList = document.getElementById("miniLoopSongList");
+const addMiniLoopBtn = document.getElementById("addMiniLoopBtn");
+const closeMiniLoopBtn = document.getElementById("closeMiniLoop");
 
 let isLoop = false;
 let isShuffle = false;
@@ -35,15 +38,20 @@ function formatTime(seconds) {
 
 function updateSeekbar() {
   if (audio.paused) return;
-  const percent = (audio.currentTime / audio.duration) * 100;
-  seekbarFilled.style.width = `${percent}%`;
-  currentTimeSpan.textContent = formatTime(audio.currentTime);
+  if (!isNaN(audio.duration)) {
+    const percent = (audio.currentTime / audio.duration) * 100;
+    seekbarFilled.style.width = `${percent}%`;
+    currentTimeSpan.textContent = formatTime(audio.currentTime);
+  }
   requestAnimationFrame(updateSeekbar);
 }
 
 async function loadSongsGrouped(folderName) {
   try {
-    const res = await fetch("data.json");
+    const res = await fetch("/data.json");
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
     const data = await res.json();
     const container = document.getElementById("audioList");
     container.innerHTML = "";
@@ -58,6 +66,11 @@ async function loadSongsGrouped(folderName) {
       currentSongIndex = 0;
       queueList.innerHTML = "";
 
+      if (currentPlaylist.length === 0) {
+        container.innerHTML += "<p>No songs in this playlist.</p>";
+        return;
+      }
+
       if (isShuffle) {
         generateShuffleQueue();
         shuffleHistory = [];
@@ -68,14 +81,14 @@ async function loadSongsGrouped(folderName) {
 
       currentPlaylist.forEach((song, index) => {
         const li = document.createElement("li");
-        li.textContent = song.title;
+        li.textContent = song.title || `Song ${index + 1}`;
         li.classList.add("song-item");
         li.dataset.index = index;
         li.addEventListener("click", () => playSong(index));
         container.appendChild(li);
 
         const queueItem = document.createElement("li");
-        queueItem.textContent = song.title;
+        queueItem.textContent = song.title || `Song ${index + 1}`;
         queueItem.classList.add("song-item");
         queueItem.dataset.index = index;
         queueItem.addEventListener("click", () => playSong(index));
@@ -86,6 +99,8 @@ async function loadSongsGrouped(folderName) {
     }
   } catch (err) {
     console.error("Failed to load songs for", folderName, err);
+    const container = document.getElementById("audioList");
+    container.innerHTML = `<p>Error loading songs: ${err.message}. Please check the console for details.</p>`;
   }
 }
 
@@ -94,8 +109,6 @@ function playSong(index) {
   currentSongIndex = index;
   const song = currentPlaylist[index];
   audio.src = song.file;
-
-  // ✅ Ensure loop setting is always reapplied
   audio.loop = isLoop;
 
   if (song.title) {
@@ -114,33 +127,55 @@ function playSong(index) {
   document.querySelectorAll("#queueList .song-item").forEach(item => item.classList.remove("active"));
   document.querySelector(`#queueList .song-item[data-index="${index}"]`)?.classList.add("active");
 
-  audio.addEventListener("loadedmetadata", function autoStartOnce() {
+  audio.play().catch(console.error);
+  if (!isNaN(audio.duration)) {
     totalTimeSpan.textContent = formatTime(audio.duration);
-    audio.play().catch(console.error);
     requestAnimationFrame(updateSeekbar);
-    audio.removeEventListener("loadedmetadata", autoStartOnce);
-  });
+  }
+}
+
+function playNextInMiniLoop() {
+  if (miniLoopQueue.length > 0) {
+    currentSongIndex = (currentSongIndex + 1) % miniLoopQueue.length;
+    playSong(miniLoopQueue[currentSongIndex]);
+  }
+}
+
+function playNextInQueue() {
+  currentSongIndex = (currentSongIndex + 1) % currentPlaylist.length;
+  playSong(currentSongIndex);
+}
+
+function playNextShuffle() {
+  const pos = shuffleQueue.indexOf(currentSongIndex);
+  let nextIndex = pos < shuffleQueue.length - 1 ? shuffleQueue[pos + 1] : shuffleQueue[0];
+  shuffleHistory.push(currentSongIndex);
+  playSong(nextIndex);
 }
 
 audio.addEventListener("play", () => {
-  playBtn.src = "svg/playbar/play.svg";
+  playBtn.src = "svg/playbar/pause.svg";
   playBtn.classList.add("active");
   requestAnimationFrame(updateSeekbar);
 });
 
 audio.addEventListener("pause", () => {
-  playBtn.src = "svg/playbar/pause.svg";
+  playBtn.src = "svg/playbar/play.svg";
   playBtn.classList.remove("active");
 });
 
 audio.addEventListener("timeupdate", () => {
-  const percent = (audio.currentTime / audio.duration) * 100;
-  seekbarFilled.style.width = `${percent}%`;
-  currentTimeSpan.textContent = formatTime(audio.currentTime);
+  if (!isNaN(audio.duration)) {
+    const percent = (audio.currentTime / audio.duration) * 100;
+    seekbarFilled.style.width = `${percent}%`;
+    currentTimeSpan.textContent = formatTime(audio.currentTime);
+  }
 });
 
 audio.addEventListener("loadedmetadata", () => {
-  totalTimeSpan.textContent = formatTime(audio.duration);
+  if (!isNaN(audio.duration)) {
+    totalTimeSpan.textContent = formatTime(audio.duration);
+  }
 });
 
 seekbar.addEventListener("click", (e) => {
@@ -159,25 +194,25 @@ volumeSlider.addEventListener("input", () => {
 });
 
 nextBtn.addEventListener("click", () => {
-  if (isLoop) {
-    playSong(currentSongIndex); // restart current song
-  } else if (isShuffle) {
-    const pos = shuffleQueue.indexOf(currentSongIndex);
-    let nextIndex = pos < shuffleQueue.length - 1 ? shuffleQueue[pos + 1] : shuffleQueue[0];
-    playSong(nextIndex);
-  } else {
-    currentSongIndex = (currentSongIndex + 1) % currentPlaylist.length;
+  if (isMiniLoopActive && miniLoopQueue.length > 0) {
+    playNextInMiniLoop();
+  } else if (isLoop) {
     playSong(currentSongIndex);
+  } else if (isShuffle) {
+    playNextShuffle();
+  } else {
+    playNextInQueue();
   }
 });
 
-
 prevBtn.addEventListener("click", () => {
-  if (isLoop) {
-    playSong(currentSongIndex); // restart current song
-  } else if (isShuffle) {
-    const pos = shuffleQueue.indexOf(currentSongIndex);
-    let prevIndex = pos > 0 ? shuffleQueue[pos - 1] : shuffleQueue[shuffleQueue.length - 1];
+  if (isMiniLoopActive && miniLoopQueue.length > 0) {
+    currentSongIndex = (currentSongIndex - 1 + miniLoopQueue.length) % miniLoopQueue.length;
+    playSong(miniLoopQueue[currentSongIndex]);
+  } else if (isLoop) {
+    playSong(currentSongIndex);
+  } else if (isShuffle && shuffleHistory.length > 0) {
+    const prevIndex = shuffleHistory.pop();
     playSong(prevIndex);
   } else {
     currentSongIndex = (currentSongIndex - 1 + currentPlaylist.length) % currentPlaylist.length;
@@ -185,12 +220,9 @@ prevBtn.addEventListener("click", () => {
   }
 });
 
-
-
-
 loopBtn.addEventListener("click", () => {
   isLoop = !isLoop;
-  audio.loop = isLoop; // Actual audio looping
+  audio.loop = isLoop;
   loopBtn.classList.toggle("active", isLoop);
 });
 
@@ -200,20 +232,13 @@ function generateShuffleQueue() {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffleQueue[i], shuffleQueue[j]] = [shuffleQueue[j], shuffleQueue[i]];
   }
-  const currentIndex = shuffleQueue.indexOf(currentSongIndex);
-  if (currentIndex > 0) {
-    [shuffleQueue[0], shuffleQueue[currentIndex]] = [shuffleQueue[currentIndex], shuffleQueue[0]];
-  }
-  shuffleHistory = [];
+  shuffleHistory = [currentSongIndex];
 }
 
 shuffleBtn.addEventListener("click", () => {
   isShuffle = !isShuffle;
   shuffleBtn.classList.toggle("active", isShuffle);
-  if (isShuffle) {
-    generateShuffleQueue();
-    shuffleHistory = [currentSongIndex];
-  }
+  if (isShuffle) generateShuffleQueue();
 });
 
 audio.addEventListener("ended", () => {
@@ -222,11 +247,9 @@ audio.addEventListener("ended", () => {
   } else if (isShuffle) {
     playNextShuffle();
   } else {
-    playNextInQueue(); // or your normal next song function
+    playNextInQueue();
   }
 });
-
-
 
 document.querySelectorAll(".card").forEach(card => {
   card.addEventListener("click", () => {
@@ -235,65 +258,104 @@ document.querySelectorAll(".card").forEach(card => {
   });
 });
 
+// Mini Loop Functionality
 miniLoopBtn.addEventListener("click", async () => {
-  const modal = document.getElementById("miniLoopModal");
-  modal.classList.remove("hidden");
+  if (!isMiniLoopActive) {
+    try {
+      miniLoopModal.classList.remove("hidden");
+      miniLoopSongList.innerHTML = "";
+      const res = await fetch("/data.json");
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      const data = await res.json();
 
-  const listContainer = document.getElementById("miniLoopSongList");
-  listContainer.innerHTML = "";
-
-  const res = await fetch("data.json");
-  const data = await res.json();
-
-  for (const folder in data) {
-    data[folder].forEach(song => {
-      const li = document.createElement("li");
-      li.innerHTML = `
-        <label>
-          <input type="checkbox" value="${song.file}" data-title="${song.title}">
-          ${song.title}
-        </label>
-      `;
-      listContainer.appendChild(li);
-    });
+      for (const folder in data) {
+        data[folder].forEach((song, index) => {
+          const li = document.createElement("li");
+          li.innerHTML = `
+            <label>
+              <input type="checkbox" value="${song.file}" data-title="${song.title}" data-folder="${folder}" data-index="${index}">
+              ${song.title}
+            </label>
+          `;
+          miniLoopSongList.appendChild(li);
+        });
+      }
+    } catch (err) {
+      console.error("Failed to load songs for Mini Loop", err);
+      miniLoopSongList.innerHTML = `<p>Error loading songs: ${err.message}</p>`;
+    }
+  } else {
+    isMiniLoopActive = false;
+    miniLoopQueue = [];
+    miniLoopModal.classList.add("hidden");
   }
 });
 
-document.getElementById("closeMiniLoop").addEventListener("click", () => {
-  document.getElementById("miniLoopModal").classList.add("hidden");
+addMiniLoopBtn.addEventListener("click", async () => {
+  const selected = document.querySelectorAll("#miniLoopSongList input[type='checkbox']:checked");
+  if (selected.length > 7) {
+    alert("Select up to 7 songs only");
+    return;
+  }
+
+  try {
+    const res = await fetch("/data.json");
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+    const data = await res.json();
+
+    miniLoopQueue = Array.from(selected).map(cb => ({
+      title: cb.dataset.title,
+      file: cb.value,
+      folder: cb.dataset.folder,
+      index: parseInt(cb.dataset.index)
+    }));
+
+    if (miniLoopQueue.length > 0) {
+      isMiniLoopActive = true;
+      currentPlaylist = miniLoopQueue.map(item => ({
+        title: item.title,
+        file: item.file
+      }));
+      currentSongIndex = 0;
+
+      audioList.innerHTML = "<h2>Mini Loop</h2>";
+      queueList.innerHTML = "";
+      currentPlaylist.forEach((song, index) => {
+        const li = document.createElement("li");
+        li.classList.add("song-item");
+        li.textContent = song.title;
+        li.dataset.index = index;
+        li.addEventListener("click", () => playSong(index));
+        audioList.appendChild(li);
+
+        const queueItem = document.createElement("li");
+        queueItem.classList.add("song-item");
+        queueItem.textContent = song.title;
+        queueItem.dataset.index = index;
+        queueItem.addEventListener("click", () => playSong(index));
+        queueList.appendChild(queueItem);
+      });
+
+      playSong(0);
+    }
+    miniLoopModal.classList.add("hidden");
+  } catch (err) {
+    console.error("Failed to update Mini Loop", err);
+    alert("Error updating Mini Loop: " + err.message);
+  }
 });
 
-document.getElementById("addMiniLoopBtn").addEventListener("click", () => {
-  const selected = document.querySelectorAll("#miniLoopSongList input[type='checkbox']:checked");
-  if (selected.length > 7) return alert("Select up to 7 songs only");
-
-  const queue = [];
-  selected.forEach(cb => {
-    queue.push({ title: cb.dataset.title, file: cb.value });
-  });
-
-  currentPlaylist = queue;
-  currentSongIndex = 0;
-
-  audioList.innerHTML = "<h2>Mini Loop</h2>";
-  queueList.innerHTML = "";
-  queue.forEach((song, index) => {
-    const li = document.createElement("li");
-    li.classList.add("song-item");
-    li.textContent = song.title;
-    li.dataset.index = index;
-    li.dataset.src = song.file;
-    li.addEventListener("click", () => playSong(index));
-    audioList.appendChild(li);
-  });
-
-  if (queue.length > 0) playSong(0);
-  document.getElementById("miniLoopModal").classList.add("hidden");
+closeMiniLoopBtn.addEventListener("click", () => {
+  miniLoopModal.classList.add("hidden");
 });
 
 clearMiniLoopBtn.addEventListener("click", () => {
-  document.getElementById("audioList").innerHTML = "<h2>Your Library</h2>";
-  document.querySelectorAll("#miniLoopSongList input[type='checkbox']").forEach(cb => cb.checked = false);
+  isMiniLoopActive = false;
+  miniLoopQueue = [];
   currentPlaylist = [];
   currentSongIndex = 0;
   audio.pause();
@@ -303,13 +365,15 @@ clearMiniLoopBtn.addEventListener("click", () => {
   currentTimeSpan.textContent = "0:00";
   totalTimeSpan.textContent = "0:00";
   seekbarFilled.style.width = "0%";
+  audioList.innerHTML = "<h2>Your Library</h2>";
   queueList.innerHTML = "";
   document.querySelectorAll(".song-item").forEach(item => item.classList.remove("active"));
+  miniLoopModal.classList.add("hidden");
 });
 
-// Clear Library Button
 document.getElementById("clearLibraryBtn").addEventListener("click", () => {
-  document.getElementById("audioList").innerHTML = "<h2>Your Library</h2>";
+  isMiniLoopActive = false;
+  miniLoopQueue = [];
   currentPlaylist = [];
   currentSongIndex = 0;
   audio.pause();
@@ -319,22 +383,103 @@ document.getElementById("clearLibraryBtn").addEventListener("click", () => {
   currentTimeSpan.textContent = "0:00";
   totalTimeSpan.textContent = "0:00";
   seekbarFilled.style.width = "0%";
+  audioList.innerHTML = "<h2>Your Library</h2>";
   document.querySelectorAll(".song-item").forEach(item => item.classList.remove("active"));
 });
 
-// Clear Queue Button
 document.getElementById("clearQueueBtn").addEventListener("click", () => {
-  document.getElementById("queueList").innerHTML = "";
+  queueList.innerHTML = "";
 });
 
-// ✅ Theme toggle fix
 const themeToggleBtn = document.getElementById("themeToggleBtn");
-themeToggleBtn.addEventListener("click", () => {
-  document.body.classList.toggle("light-mode");
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+    themeToggleBtn.textContent = document.body.classList.contains("light-mode") ? "Dark Mode" : "Light Mode";
+  });
+}
 
-  if (document.body.classList.contains("light-mode")) {
-    themeToggleBtn.textContent = "Dark Mode";
-  } else {
-    themeToggleBtn.textContent = "Light Mode";
+window.addEventListener("load", () => {
+  if (typeof ColorThief === "undefined") {
+    console.error("ColorThief library is not loaded.");
+    return;
   }
+
+  const colorThief = new ColorThief();
+  const cards = document.querySelectorAll(".card");
+
+  function applyGlowColor(card, img) {
+    try {
+      if (!img.complete || img.naturalWidth === 0) {
+        console.warn("Image not loaded or invalid:", img.src);
+        card.style.setProperty("--glow-color", "rgba(128, 128, 128, 0.5)");
+        return;
+      }
+
+      const color = colorThief.getColor(img);
+      let [r, g, b] = color;
+
+      if (document.body.classList.contains("light-mode") || document.body.classList.contains("invert-mode")) {
+        r = Math.max(50, r - 100);
+        g = Math.max(50, g - 100);
+        b = Math.max(50, b - 100); // Fixed typo from Code 2
+      }
+
+      const rgb = `rgba(${r}, ${g}, ${b}, 0.5)`; // Use rgba like Code 1
+      card.style.setProperty("--glow-color", rgb);
+
+      if (document.body.classList.contains("light-mode")) {
+        card.classList.add("enhanced-glow");
+      } else {
+        card.classList.remove("enhanced-glow");
+      }
+    } catch (err) {
+      console.warn("Couldn't extract color from image:", img.src, err);
+      card.style.setProperty("--glow-color", "rgba(128, 128, 128, 0.5)");
+    }
+  }
+
+  cards.forEach(card => {
+    const img = card.querySelector(".main-img");
+    if (!img) {
+      console.warn("No .main-img found in card:", card);
+      return;
+    }
+
+    img.crossOrigin = "anonymous";
+    applyGlowColor(card, img);
+
+    if (img.complete && img.naturalWidth !== 0) {
+      applyGlowColor(card, img);
+    } else {
+      img.addEventListener("load", () => applyGlowColor(card, img), { once: true });
+      img.addEventListener("error", () => {
+        console.warn("Image failed to load:", img.src);
+        card.style.setProperty("--glow-color", "rgba(128, 128, 128, 0.5)");
+      }, { once: true });
+    }
+
+    card.addEventListener("mouseenter", () => {
+      card.classList.add("glow-hover");
+      applyGlowColor(card, img); // Reapply on hover like Code 1
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.classList.remove("glow-hover");
+    });
+
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener("click", () => {
+        setTimeout(() => applyGlowColor(card, img), 0); // Reapply on theme change
+      }, { once: true });
+    }
+  });
+
+  const styleSheet = document.createElement("style");
+  styleSheet.textContent = `
+    .enhanced-glow.glow-hover {
+      box-shadow: 0 0 30px 10px var(--glow-color) !important;
+    }
+  `;
+  document.head.appendChild(styleSheet);
 });

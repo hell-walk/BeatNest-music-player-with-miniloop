@@ -1,26 +1,81 @@
 body {
   margin: 0;
   padding: 0;
-  background: #0f0f0f;
   font-family: Arial, sans-serif;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  overflow: hidden; /* Prevent scrollbars from background movement */
 }
 
+/* Twinkling Background Styles with Increased Brightness */
+.stars, .twinkling, .clouds {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: brightness(1.5);
+}
+
+.stars {
+  background: #000 url('/twinkling/stars.png') repeat top center;
+  z-index: -3;
+}
+
+.twinkling {
+  background: transparent url('/twinkling/twinkling.png') repeat top center;
+  z-index: -2;
+  animation: move-twink-back 200s linear infinite;
+}
+
+.clouds {
+  background: transparent url('/twinkling/clouds.png') repeat top center;
+  z-index: -1;
+  opacity: 0.6;
+  animation: move-clouds-back 200s linear infinite;
+}
+
+@keyframes move-twink-back {
+  from { background-position: 0 0; }
+  to { background-position: -10000px 5000px; }
+}
+
+@keyframes move-clouds-back {
+  from { background-position: 0 0; }
+  to { background-position: 10000px 0; }
+}
+
+/* Ensure login container stays above background */
 .login-container {
-  background-color: #000000;
   padding: 40px;
   border-radius: 10px;
   width: 320px;
-  box-shadow: 0 0 15px #22c5bc;
   text-align: center;
+  color: white;
+  opacity: 0;
+  transform: translateY(50px);
+  box-shadow: none;
+  transition: all 0.8s ease;
+  position: relative;
+  z-index: 1;
+}
+
+/* Final animated state */
+.login-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow: 0 0 15px #FAF9F6; /* Replaced #22c5bc with #FAF9F6 */
+  animation: pulseGlow 2s infinite ease-in-out;
 }
 
 .login-container h2 {
-  color: #2BFCF2;
+  color: white;
   margin-bottom: 25px;
 }
 
@@ -37,24 +92,33 @@ body {
 .login-container button {
   width: 100%;
   padding: 10px;
-  background: #2BFCF5;
-  border: none;
+  background: none;
+  border: 2px solid #FAF9F6; /* Fixed border syntax and set to off-white */
   border-radius: 6px;
-  color: white;
+  color: white; /* Ensured button text is white */
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s;
 }
 
 .login-container button:hover {
-  background: #2BFCF2;
+  background: #FAF9F6; /* Replaced #2BFCF2 with #FAF9F6 */
 }
 
 .login-container a {
-  color: #2BFCF2;
+  color: white;
   text-decoration: none;
 }
 
 .login-container a:hover {
   text-decoration: underline;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px #FAF9F6; /* Replaced #00f7ff with #FAF9F6 */
+  }
+  50% {
+    box-shadow: 0 0 25px #FAF9F6; /* Replaced #00f7ff with #FAF9F6 */
+  }
 }
