@@ -12,34 +12,34 @@
 </head>
 
 <body>
-        <div class="stars"></div>
-        <div class="twinkling"></div> 
-       <div class="clouds"></div>
-       <div class="title"></div>
+  <div class="stars"></div>
+  <div class="twinkling"></div>
+  <div class="clouds"></div>
+  <div class="title"></div>
   <header>
     <div class="container flex">
       <div class="left m-1 rounded p-1">
         <div class="home m-1 rounded p-1">
           <div class="logo">
-            <img src="svg/logo.svg" class="invert-on-light"/>
+            <img src="svg/logo.svg" class="invert-on-light" />
           </div>
           <ul>
             <li>
-              <img src="svg/home.svg"  class="invert-on-light" />
+              <img src="svg/home.svg" class="invert-on-light" />
               <p>Home</p>
             </li>
             <li>
-              <img src="svg/search.svg"  class="invert-on-light"  />
+              <img src="svg/search.svg" class="invert-on-light" />
               <p>Search</p>
             </li>
           </ul>
-        </div> 
+        </div>
       </div>
       <div class="right">
         <nav class="navigation m-1 p-1 rounded">
           <ul>
-            <li><a href="htmlwaste/login/l.html" target="_blank" >Login</a></li>
-            <li><a href="htmlwaste/sign up/s.html" target="_blank" >Signup</a></li>
+            <li><a href="htmlwaste/login/l.html" target="_blank">Login</a></li>
+            <li><a href="htmlwaste/sign up/s.html" target="_blank">Signup</a></li>
           </ul>
         </nav>
       </div>
@@ -53,24 +53,24 @@
         <div class="library-queue left rounded m-1">
           <!-- Library Section -->
           <div class="library-section">
-  <div class="flex-between">
-    <h1>Your Library</h1>
-    <button id="clearLibraryBtn">Clear</button>
-  </div>
-  <ul id="audioList" class="song-list mt-2"></ul>
-</div>
+            <div class="flex-between">
+              <h1>Your Library</h1>
+              <button id="clearLibraryBtn">Clear</button>
+            </div>
+            <ul id="audioList" class="song-list mt-2"></ul>
+          </div>
 
           <!-- Divider -->
           <hr class="divider" />
 
           <!-- Queue Section -->
-         <div class="queue-section">
-  <div class="flex-between">
-    <h1>Queue</h1>
-    <button id="clearQueueBtn">Clear</button>
-  </div>
-  <ul id="queueList" class="song-list mt-2"></ul>
-</div>
+          <div class="queue-section">
+            <div class="flex-between">
+              <h1>Queue</h1>
+              <button id="clearQueueBtn">Clear</button>
+            </div>
+            <ul id="queueList" class="song-list mt-2"></ul>
+          </div>
         </div>
       </div>
 
@@ -82,8 +82,8 @@
             <!-- 6 Playlist Cards -->
             <div class="card" data-folder="honey_singh">
               <div class="img-container">
-                <img src="images/Honey Singh.jpg"class="main-img" />
-                <img src="svg/play-button.svg"  class="hover-img" />
+                <img src="images/Honey Singh.jpg" class="main-img" />
+                <img src="svg/play-button.svg" class="hover-img" />
               </div>
               <h2>Honey Singh</h2>
               <p>Popular Punjabi Hits</p>
@@ -91,7 +91,7 @@
 
             <div class="card" data-folder="just_by_me">
               <div class="img-container">
-                <img src="images/just for me.jpg"  class="main-img" />
+                <img src="images/just for me.jpg" class="main-img" />
                 <img src="svg/play-button.svg" class="hover-img" />
               </div>
               <h2>Just For Me</h2>
@@ -118,7 +118,7 @@
 
             <div class="card" data-folder="seedhe_maut">
               <div class="img-container">
-                <img src="images/seedhe maut.jpg"  class="main-img" />
+                <img src="images/seedhe maut.jpg" class="main-img" />
                 <img src="svg/play-button.svg" class="hover-img" />
               </div>
               <h2>Seedhe Maut</h2>
@@ -127,16 +127,16 @@
 
             <div class="card" data-folder="soft_mix">
               <div class="img-container">
-                <img src="images/Soft Mix.jpg"  class="main-img" />
-                <img src="svg/play-button.svg"  class="hover-img" />
+                <img src="images/Soft Mix.jpg" class="main-img" />
+                <img src="svg/play-button.svg" class="hover-img" />
               </div>
               <h2>Soft Mix</h2>
               <p>Songs that can have tear in your eyes</p>
             </div>
             <div class="card" data-folder="eminem">
               <div class="img-container">
-                <img src="/images/images.jpg"  class="main-img" />
-                <img src="svg/play-button.svg"  class="hover-img" />
+                <img src="/images/images.jpg" class="main-img" />
+                <img src="svg/play-button.svg" class="hover-img" />
               </div>
               <h2>eminem</h2>
               <p>eminem</p>
@@ -163,14 +163,14 @@
     <div class="bar right">
       <div class="playbar right rounded m-1">
         <div class="seekbar" id="seekbar">
-      <div class="seekbar-filled" id="seekbar-filled"></div>
-    </div>
+          <div class="seekbar-filled" id="seekbar-filled"></div>
+        </div>
         <div class="songtime">
           <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
         </div>
         <div class="songbuttons">
-          <img id="prevBtn" src="svg/playbar/previous.svg"  class="inverted"  />
-          <img id="playBtn" src="svg/playbar/pause.svg" class="inverted"  />
+          <img id="prevBtn" src="svg/playbar/previous.svg" class="inverted" />
+          <img id="playBtn" src="svg/playbar/pause.svg" class="inverted" />
           <img id="nextBtn" src="svg/playbar/forward.svg" class="inverted" />
           <img id="shuffleBtn" src="svg/playbar/shuffle.svg" class="inverted" />
           <img id="loopBtn" src="svg/playbar/loop.svg" class="inverted" />
@@ -178,26 +178,26 @@
           <button id="clearMiniLoopBtn" class="miniloop-btn">Clear Mini Loop</button>
         </div>
         <div class="songinfo" id="songInfo">
-  <span class="scrolling-text">Song Title</span>
-</div>
-<div class="volume-control">
-  <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1" />
-</div>
+          <span class="scrolling-text">Song Title</span>
+        </div>
+        <div class="volume-control">
+          <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1" />
+        </div>
 
-       
+
       </div>
     </div>
   </footer>
-   <!-- Mini Loop Modal -->
-<div id="miniLoopModal" class="modal hidden">
-  <div class="modal-content">
-    <h2>Select Songs for Mini Loop</h2>
-    <ul id="miniLoopSongList" class="song-list"></ul>
-    <button id="addMiniLoopBtn">Add to Mini Loop</button>
-    <button id="closeMiniLoop">Close</button>
-    <button id="clearMiniLoopBtn">Clear Mini Loop</button>
+  <!-- Mini Loop Modal -->
+  <div id="miniLoopModal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Select Songs for Mini Loop</h2>
+      <ul id="miniLoopSongList" class="song-list"></ul>
+      <button id="addMiniLoopBtn">Add to Mini Loop</button>
+      <button id="closeMiniLoop">Close</button>
+      <button id="clearMiniLoopBtn">Clear Mini Loop</button>
+    </div>
   </div>
-</div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
   <script src="script.js"></script>
