@@ -42,6 +42,22 @@
     { "title": "Agar Tum Sath Ho", "file": "music/soft_mix/agar_tum_sath_ho-arijit_kumar.mp3" },
     { "title": "Chandhan Me", "file": "music/soft_mix/chandhan_me-kailash_kher.mp3" },
     { "title": "Saiyaan", "file": "music/soft_mix/saiyaan-kailash_kher.mp3" },
-    { "title": "Sazish", "file": "music/soft_mix/sazish-bhuvan_bam.mp3" }
+    { "title": "photograph", "file": "music/soft_mix/photograph-ed_shareen.mp3" },
+    { "title": "i am a mess", "file": "music/soft_mix/i_am_a_mess-ed_shereen.mp3" },
+    { "title": "Sazish", "file": "music/soft_mix/sazish-bhuvan_bam.mp3" },
+    { "title": "Safar", "file": "music/soft_mix/safar-bhuvan_bam.mp3" }
+  ],
+  "eminem":[
+    { "title": "ass like that", "file": "music/eminem/ass_like_that-eminem.mp3" },
+    { "title": "homicide", "file": "music/eminem/homicide-eminem.mp3" },
+    { "title": "houdini", "file": "music/eminem/houdini.mp3"},
+    { "title": "i need a doctor", "file": "music/eminem/i_need_a_doctor-eminem.mp3" },
+    { "title": "lose yourself", "file": "music/eminem/lose_yourself-eminem.mp3" },
+    { "title": "love the way you lie", "file": "music/eminem/love_the_way_you_lie-eminem.mp3" },
+    { "title": "pump it", "file": "music/eminem/pump_it-Black_Eyed_Peas.mp3" },
+    { "title": "superman", "file": "music/eminem/superman-eminem.mp3" },
+    { "title": "till I collapse", "file": "music/eminem/till_i_collapse-eminem.mp3" },
+    { "title": "we made you", "file": "music/eminem/we_made_you-eminem.mp3" },
+    { "title": "when I am gone", "file": "music/eminem/when_i_am_gone-eminem.mp3" }
   ]
 }

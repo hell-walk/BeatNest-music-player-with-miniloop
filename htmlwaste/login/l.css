@@ -53,17 +53,9 @@ body {
 
 /* Ensure login container stays above background */
 .login-container {
-<<<<<<< HEAD
   padding: 40px;
   border-radius: 10px;
   width: 320px;
-=======
-  background-color: #000000;
-  padding: 40px;
-  border-radius: 10px;
-  width: 320px;
-  box-shadow: 0 0 15px #22c5bc;
->>>>>>> 6af9fdd678c8185c4355429982a4474dc526996d
   text-align: center;
   color: white;
   opacity: 0;
@@ -83,11 +75,7 @@ body {
 }
 
 .login-container h2 {
-<<<<<<< HEAD
   color: white;
-=======
-  color: #2BFCF2;
->>>>>>> 6af9fdd678c8185c4355429982a4474dc526996d
   margin-bottom: 25px;
 }
 
@@ -102,15 +90,10 @@ body {
 }
 
 .login-container button {
-  width: 100%;
+ width: 100%;
   padding: 10px;
-<<<<<<< HEAD
   background: none;
   border: 2px solid #FAF9F6; /* Fixed border syntax and set to off-white */
-=======
-  background: #2BFCF5;
-  border: none;
->>>>>>> 6af9fdd678c8185c4355429982a4474dc526996d
   border-radius: 6px;
   color: white; /* Ensured button text is white */
   font-weight: bold;
@@ -119,19 +102,11 @@ body {
 }
 
 .login-container button:hover {
-<<<<<<< HEAD
   background: #FAF9F6; /* Replaced #2BFCF2 with #FAF9F6 */
 }
 
 .login-container a {
   color: white;
-=======
-  background: #2BFCF2;
-}
-
-.login-container a {
-  color: #2BFCF2;
->>>>>>> 6af9fdd678c8185c4355429982a4474dc526996d
   text-decoration: none;
 }
 
