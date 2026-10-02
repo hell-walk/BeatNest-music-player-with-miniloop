@@ -1,92 +1,101 @@
-# BeatNest
+# 🚀 BeatNest
 
-A free music player with curated playlists and a **Mini Loop** – pick up to seven songs from any playlist and they play back to back, on repeat.
+📝 **What it does**
+→ A soothing, minimalist music player: stream seven curated playlists, then build a **Mini Loop** – up to seven songs that play back to back, on repeat, for as long as you need.
 
-Version 2 is a full rewrite of the original single-page vanilla JS player as a **React 19 + Vite** client with an **Express 5 + SQLite** backend, in an npm-workspaces monorepo.
+## 📸 Preview
+
+![BeatNest – free music player with Mini Loop](client/public/og-image.png)
+
+<!-- TODO: replace with screenshots of the three themes (docs/screenshots/soothing.png, light.png, dark.png) -->
+
+## ✨ Features
+
+→ **Mini Loop** – pick up to 7 songs from any playlist; they repeat seamlessly. Saved to your account, or to the browser for guests (and migrated when you sign up).
+→ **Three themes** – Soothing (warm tape-deck paper, default), Light (crisp paper) and Dark (navy night sky), switched from the navbar and remembered.
+→ **Calm player** – spinning “reel” now-playing card with a progress ring, shuffle, repeat (off / all / one), seek, volume, keyboard space-bar toggle, lock-screen / media-key controls.
+→ **Accounts** – sign up / log in with validated forms, secure httpOnly sessions, CSRF protection, bot protection (honeypot + signed form tokens) and rate limiting.
+→ **Launch-ready** – privacy & terms pages, cookie-consent-gated analytics (first-party, Plausible or GA4), per-route SEO/Open Graph tags, sitemap & robots, real HTTP 404s, WCAG AA colour contrast in every theme, responsive down to 375 px.
+→ **Fast** – 119 KB of JS, WebP covers with JPEG fallback, immutable hashed assets, brotli/gzip, Range-request audio streaming.
+
+## 🛠 Tech Stack
+
+→ **Frontend:** React 19, React Router 8, Vite 8, plain CSS with design tokens
+→ **Backend:** Node 22+/24, Express 5, SQLite via the built-in `node:sqlite` (no native drivers)
+→ **Shared:** zod schemas used by both client and server (one source of truth for validation)
+→ **Tooling:** npm workspaces, ESLint 9, `node --test`, sharp (image pipeline)
 
 ```
 beatnest/
-├── client/          React app (Vite). public/ holds generated icons, images, sitemap, robots
-├── server/          Express API, SQLite (node:sqlite), media files, tests
-├── shared/          zod schemas, route list and constants used by BOTH client and server
-├── scripts/         asset pipeline + launch checks (images, icons, sitemap, links, perf, contrast, secrets)
-├── assets-src/      raw source images (covers, backgrounds, logo) – optimised into client/public
-├── docs/            LAUNCH-CHECKLIST.md (what was implemented and where), DEBUG-LOG.md (v1 bugs fixed)
-└── legacy/          the original v1 HTML/CSS/JS, kept for reference only
+├── client/      React app · public/ holds generated icons, images, sitemap, robots
+├── server/      Express API, SQLite, media files, tests
+├── shared/      zod schemas, route list, constants
+├── scripts/     asset pipeline + launch checks (images, icons, sitemap, links, perf, contrast, secrets)
+├── assets-src/  raw source images (covers, backgrounds, logo)
+├── docs/        LAUNCH-CHECKLIST.md · DEBUG-LOG.md
+└── legacy/      the original v1 vanilla JS player, for reference
 ```
 
-## Quick start
+## ⚙️ Installation
 
-Requires Node 22.13+ (built-in SQLite). Tested on Node 24.
+Requires **Node 22.13+** (Node 24 recommended).
 
 ```bash
+git clone https://github.com/hell-walk/BeatNest-music-player-with-miniloop.git
+cd BeatNest-music-player-with-miniloop
 npm install
-npm run assets      # generate optimised covers, backgrounds, favicons, OG image (one-off / when assets change)
-npm run sitemap     # generate client/public/sitemap.xml + robots.txt
-npm run dev         # API on :3000 + Vite on :5173 (Vite proxies /api and /media to the API)
+npm run assets     # one-off: generate optimised covers, backgrounds, favicons, OG image
+npm run sitemap    # generate sitemap.xml + robots.txt
+npm run dev        # API on :3000 + Vite on :5173
 ```
 
-Open <http://localhost:5173>. The database is created and seeded automatically on first start.
-
-## Scripts (run from the repo root)
+Open <http://localhost:5173>. The database is created and seeded on first start.
 
 | Command | What it does |
 | --- | --- |
-| `npm run dev` | Start API (`node --watch`) and Vite together |
-| `npm run build` | Assets + sitemap + production client build into `client/dist` |
-| `npm start` | Serve API **and** the built client from one Express process |
-| `npm test` | Server test-suite (30 tests, in-memory DB, no network) |
-| `npm run lint` | ESLint (React hooks + React Compiler rules) on the client |
-| `npm run seed` | Re-seed playlists/tracks from `server/data/seed/playlists.json` (idempotent) |
-| `npm run report -w server` | Print first-party analytics summary (`-- 7` for 7 days) |
-| `npm run check` | All launch checks: secrets → contrast → links → perf (needs `npm start` running) |
+| `npm run build` | Assets + sitemap + production client build |
+| `npm start` | Serve API **and** built client from one process |
+| `npm test` | 30 server tests (in-memory DB) |
+| `npm run lint` | ESLint on the client |
+| `npm run check` | Secrets → contrast → links → perf checks (server must be running) |
+| `npm run report -w server` | First-party analytics summary |
 
-## Configuration
+## 🔑 Environment Variables
 
-Copy `server/.env.example` to `server/.env`. The important ones:
+Copy `server/.env.example` → `server/.env`. Nothing here is ever sent to the browser; the client fetches non-secret settings from `GET /api/config`.
 
-| Variable | Purpose |
-| --- | --- |
-| `SITE_URL` | Public origin (`https://your-domain.com`). Used for canonical/OG URLs, CORS and the CSRF origin check. Also pass it to `npm run sitemap`. |
-| `SESSION_SECRET` | Signs the session cookie and anti-spam form tokens. **Required in production.** |
-| `ENFORCE_HTTPS` / `TRUST_PROXY` | Redirect http→https + HSTS behind a TLS-terminating proxy (`TRUST_PROXY=1`). |
-| `ANALYTICS_PROVIDER` | `first-party` (default, SQLite), `plausible`, `ga4` or `none`. The client reads this from `/api/config`, so the CSP always matches. |
-
-The client has **no secrets and no required env vars** (`client/.env.example`). Everything the browser needs comes from `GET /api/config`.
-
-## Themes
-
-Three themes, switched with the toggle in the navbar and remembered in `localStorage`:
-
-| Theme | Look | Fonts |
+| Variable | Required | Purpose |
 | --- | --- | --- |
-| **Soothing** (default) | warm sand paper with a dotted "tape deck" grid, sage green | Newsreader italic + Plus Jakarta Sans, Space Mono micro-labels |
-| **Light** | crisp paper, white cards, forest green | Newsreader + Plus Jakarta Sans |
-| **Dark** | deep navy night sky with drifting stars, bright mint | Newsreader + Inter |
+| `SESSION_SECRET` | **production** | Signs session cookies and anti-spam form tokens. Generate: `node -e "console.log(require('crypto').randomBytes(48).toString('base64url'))"` |
+| `SITE_URL` | production | Public origin, e.g. `https://beatnest.app` – canonical/OG URLs, CORS, CSRF origin check, sitemap |
+| `ENFORCE_HTTPS` / `TRUST_PROXY` | production | `true` / `1` behind a TLS-terminating proxy: http→https redirect + HSTS |
+| `ANALYTICS_PROVIDER` | optional | `first-party` (default), `plausible`, `ga4` or `none` (+ `PLAUSIBLE_DOMAIN` / `GA_MEASUREMENT_ID`) |
+| `PORT`, `DB_PATH`, `MEDIA_DIR`, `LOG_LEVEL` | optional | Defaults work for local development |
 
-All three are pure token overrides in `client/src/styles/tokens.css` (`:root[data-theme="…"]`); `client/public/theme-init.js` applies the saved theme before first paint. `npm run check:contrast` validates every text pair in every theme.
+**Never commit `.env`** – it is git-ignored, and `npm run check:secrets` scans client code for leaked keys.
 
-## Architecture notes
+## 🔗 Live Demo
 
-- **Audio** is served from `server/media/music` by `express.static`, which implements HTTP Range requests (seeking works without downloading whole files).
-- **Auth**: scrypt password hashes, 256-bit random session tokens stored as SHA-256 hashes, signed `httpOnly` `SameSite=Lax` cookie. State-changing requests need the `X-Requested-With: BeatNest` header and a matching `Origin` (CSRF).
-- **Forms**: one zod schema per form in `shared/` validates on the client (blur/submit) and again on the server. Spam protection = honeypot field + server-signed form token with minimum fill time + per-route rate limits.
-- **SEO**: the server rewrites `<title>`, description, canonical and Open Graph/Twitter tags per route when serving `index.html` (so link previews work without SSR); the React app keeps them in sync on navigation. Unknown URLs get a real **HTTP 404**.
-- **Analytics** are consent-gated. Nothing loads or is sent before the visitor accepts; first-party events contain no IP or user id and are pruned after 90 days.
-- **Mini Loop** is saved server-side for members and in `localStorage` for guests (and migrated to the account on sign-up/login).
+→ Not deployed yet. Run locally with the steps above, or deploy with `npm ci && npm run build && npm start` behind any TLS proxy (nginx, Caddy, Render, Fly, Railway).
 
-## Deploying
+## 🗺 Roadmap
 
-1. `npm ci && npm run build`
-2. Set `NODE_ENV=production`, `SITE_URL`, `SESSION_SECRET`, `ENFORCE_HTTPS=true`, `TRUST_PROXY=1` (or however many proxies sit in front).
-3. `npm start` – one process serves the API, the audio and the built client. Put it behind nginx/Caddy/your platform's TLS terminator.
-4. Replace the placeholder contact emails in `client/src/pages/PrivacyPage.jsx` and `TermsPage.jsx`, and have the legal pages reviewed.
-5. Run `npm run check` against the deployed URL: `CHECK_URL=https://your-domain.com npm run check:links`.
+→ Sleep timer (stop after N loops / minutes)
+→ “Quiet mode” that hides everything but the reel while music plays
+→ Themed screenshots in this README and the social preview image in the Soothing palette
+→ Playlist search
+→ Upload your own tracks
 
-### Native binaries blocked? (Windows Application Control)
+## 🤝 Contributing
 
-`sharp` (image pipeline) ships a native binary that some locked-down Windows machines refuse to load. This repo also installs `@img/sharp-wasm32`, which sharp picks up automatically, so `npm run assets` works either way – just slower on WASM.
+1. Fork and create a branch: `git checkout -b feature/your-idea`
+2. `npm install`, `npm run dev`, make your change
+3. Before opening a PR run `npm run lint && npm test && npm run build`, and `npm run check` against a running `npm start`
+4. Keep the product honest: no controls that don't do anything, every colour pair must pass `npm run check:contrast`, one primary button per screen
 
-## Credits
+Bug reports and ideas are welcome as GitHub issues.
 
-Covers and recordings belong to their respective artists and rights holders and are included for personal, non-commercial listening.
+## 📄 License
+
+→ Code is released under the [MIT License](LICENSE).
+→ The bundled recordings and cover art belong to their respective artists and rights holders and are **not** covered by the license; they are included for personal, non-commercial listening only.
