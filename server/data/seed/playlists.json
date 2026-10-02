@@ -1,0 +1,105 @@
+[
+  {
+    "slug": "honey-singh",
+    "title": "Honey Singh",
+    "description": "Popular Punjabi hits",
+    "folder": "honey_singh",
+    "tracks": [
+      { "title": "Angrezi Beat", "artist": "Yo Yo Honey Singh, Gippy Grewal", "file": "angrezi_beat-honey_singh.mp3" },
+      { "title": "Breakup Party", "artist": "Yo Yo Honey Singh, Leo", "file": "breakup_party-honey_singh.mp3" },
+      { "title": "Dope Shope", "artist": "Yo Yo Honey Singh, Deep Money", "file": "dope_shope-honey_singh.mp3" },
+      { "title": "High Heels", "artist": "Jaz Dhami, Yo Yo Honey Singh", "file": "high_heels-honey_singh.mp3" },
+      { "title": "Ise Kehte Hai Hip Hop", "artist": "Yo Yo Honey Singh", "file": "ise_kehte_hai_hip_hop-honey_singh.mp3" },
+      { "title": "Proper Patola", "artist": "Diljit Dosanjh, Badshah", "file": "proper_patola-diljit_dosanj.mp3" },
+      { "title": "Yaar Bathere", "artist": "Alfaaz, Yo Yo Honey Singh", "file": "yaar_bathere-honey_singh.mp3" }
+    ]
+  },
+  {
+    "slug": "just-for-me",
+    "title": "Just For Me",
+    "description": "A little bit emo",
+    "folder": "just_by_me",
+    "tracks": [
+      { "title": "death bed (coffee for your head)", "artist": "Powfu, beabadoobee", "file": "death_bed-powfu_beabadoobee.mp3" },
+      { "title": "Die With a Smile", "artist": "Lady Gaga, Bruno Mars", "file": "die_with_a_smile-lady_gaga_bruno_mars.mp3" },
+      { "title": "It's You × Muskurane Ki Wajah", "artist": "Ali Gatie, Arijit Singh", "file": "its_you_and_muskurane_ki_wajah.mp3" },
+      { "title": "No Surprises", "artist": "Radiohead", "file": "no_surprises-radiohead.mp3" }
+    ]
+  },
+  {
+    "slug": "old-rizz",
+    "title": "Old Rizz",
+    "description": "Old school love",
+    "folder": "old_rizz",
+    "tracks": [
+      { "title": "Bheegi Bheegi Raaton Mein", "artist": "Kishore Kumar, Lata Mangeshkar", "file": "bheegi_bheegi_raatonn_me.mp3" },
+      { "title": "Chingari Koi Bhadke", "artist": "Kishore Kumar", "file": "chingari_koi_bhadke.mp3" },
+      { "title": "Hothon Se Chhu Lo Tum", "artist": "Jagjit Singh", "file": "hotho_se_chulo_tum-jagjit_singh.mp3" },
+      { "title": "Itna Na Mujhse Tu Pyaar Badha", "artist": "Talat Mahmood, Lata Mangeshkar", "file": "itna_na_mujhse_tu_pyaar_badha.mp3" }
+    ]
+  },
+  {
+    "slug": "rock-and-metal",
+    "title": "Rock and Metal",
+    "description": "Enjoy popular rock songs",
+    "folder": "rock_a_baby",
+    "tracks": [
+      { "title": "21 Guns", "artist": "Green Day", "file": "21_guns-green_days.mp3" },
+      { "title": "Back in Black", "artist": "AC/DC", "file": "back_in_black-ac_dc.mp3" },
+      { "title": "Come As You Are", "artist": "Nirvana", "file": "come_as_you_are-nirvana.mp3" },
+      { "title": "Highway to Hell", "artist": "AC/DC", "file": "highway_to_hell-ac_dc.mp3" },
+      { "title": "Kingdom", "artist": "Downstait", "file": "kingdom-downstrait.mp3" },
+      { "title": "Sucker for Pain", "artist": "Lil Wayne, Wiz Khalifa, Imagine Dragons", "file": "sucker_of_pain-many_artists.mp3" },
+      { "title": "The Emptiness Machine", "artist": "Linkin Park", "file": "the_emptiness_machine-linkin_park.mp3" }
+    ]
+  },
+  {
+    "slug": "seedhe-maut",
+    "title": "Seedhe Maut",
+    "description": "Delhi hip-hop at its sharpest",
+    "folder": "seedhe_maut",
+    "tracks": [
+      { "title": "11K", "artist": "Seedhe Maut", "file": "11k-seedhe_maut.mp3" },
+      { "title": "Akatsuki", "artist": "Seedhe Maut, Raga", "file": "akatsuki-seedhe_maut_raga.mp3" },
+      { "title": "Bure Din", "artist": "Seedhe Maut", "file": "bure_din-seedhe_maut.mp3" },
+      { "title": "Champion", "artist": "Seedhe Maut", "file": "champion-seedhe_maut.mp3" },
+      { "title": "Luka Chippi", "artist": "Seedhe Maut", "file": "luka_chippi-seedhe_maut.mp3" },
+      { "title": "Nalla Freestyle", "artist": "Seedhe Maut", "file": "nalla_freestyle-seedhe_maut.mp3" },
+      { "title": "Namastute", "artist": "Seedhe Maut", "file": "namastute-seedhe_maut.mp3" }
+    ]
+  },
+  {
+    "slug": "soft-mix",
+    "title": "Soft Mix",
+    "description": "Songs that can bring a tear to your eye",
+    "folder": "soft_mix",
+    "tracks": [
+      { "title": "Agar Tum Saath Ho", "artist": "Arijit Singh, Alka Yagnik", "file": "agar_tum_sath_ho-arijit_kumar.mp3" },
+      { "title": "Chandan Mein", "artist": "Kailash Kher", "file": "chandhan_me-kailash_kher.mp3" },
+      { "title": "Saiyyan", "artist": "Kailash Kher", "file": "saiyaan-kailash_kher.mp3" },
+      { "title": "Photograph", "artist": "Ed Sheeran", "file": "photograph-ed_shareen.mp3" },
+      { "title": "I'm a Mess", "artist": "Ed Sheeran", "file": "i_am_a_mess-ed_shereen.mp3" },
+      { "title": "Sazish", "artist": "Bhuvan Bam", "file": "sazish-bhuvan_bam.mp3" },
+      { "title": "Safar", "artist": "Bhuvan Bam", "file": "safar-bhuvan_bam.mp3" }
+    ]
+  },
+  {
+    "slug": "eminem",
+    "title": "Eminem",
+    "description": "Rap God essentials",
+    "folder": "eminem",
+    "tracks": [
+      { "title": "Ass Like That", "artist": "Eminem", "file": "ass_like_that-eminem.mp3" },
+      { "title": "Homicide", "artist": "Logic, Eminem", "file": "homicide-eminem.mp3" },
+      { "title": "Houdini", "artist": "Eminem", "file": "houdini.mp3" },
+      { "title": "I Need a Doctor", "artist": "Dr. Dre, Eminem, Skylar Grey", "file": "i_need_a_doctor-eminem.mp3" },
+      { "title": "Lose Yourself", "artist": "Eminem", "file": "lose_yourself-eminem.mp3" },
+      { "title": "Love the Way You Lie", "artist": "Eminem, Rihanna", "file": "love_the_way_you_lie-eminem.mp3" },
+      { "title": "Pump It", "artist": "Black Eyed Peas", "file": "pump_it-Black_Eyed_Peas.mp3" },
+      { "title": "Superman", "artist": "Eminem, Dina Rae", "file": "superman-eminem.mp3" },
+      { "title": "Till I Collapse", "artist": "Eminem, Nate Dogg", "file": "till_i_collapse-eminem.mp3" },
+      { "title": "We Made You", "artist": "Eminem", "file": "we_made_you-eminem.mp3" },
+      { "title": "When I'm Gone", "artist": "Eminem", "file": "when_i_am_gone-eminem.mp3" }
+    ]
+  }
+]

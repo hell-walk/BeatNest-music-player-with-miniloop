@@ -1,0 +1,257 @@
+/* ---------- shell ---------- */
+.app-shell {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  /* leave room for the fixed play bar */
+  padding-bottom: calc(var(--playbar-height) + env(safe-area-inset-bottom, 0px));
+}
+
+.app-main {
+  flex: 1;
+  outline: none;
+}
+
+.page {
+  padding-block: var(--space-6) var(--space-8);
+}
+
+.page-header {
+  margin-bottom: var(--space-5);
+}
+
+.page-header p {
+  color: var(--color-text-muted);
+  max-width: 60ch;
+}
+
+/* ---------- starfield background ---------- */
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--color-bg);
+}
+
+.starfield__layer {
+  position: absolute;
+  inset: -1000px;
+  background-repeat: repeat;
+  background-position: top center;
+  will-change: transform;
+}
+
+.starfield__stars {
+  background-image: url('/images/backgrounds/stars.webp');
+  opacity: 0.9;
+  animation: drift-stars 240s linear infinite;
+}
+
+.starfield__twinkling {
+  background-image: url('/images/backgrounds/twinkling.webp');
+  animation: drift-twinkle 45s linear infinite;
+}
+
+.starfield__clouds {
+  background-image: url('/images/backgrounds/clouds.webp');
+  opacity: 0.4;
+  animation: drift-clouds 70s linear infinite;
+}
+
+/* translations are multiples of the tile sizes (2000px / 100px / 900px) so loops are seamless */
+@keyframes drift-stars {
+  to {
+    transform: translate3d(-2000px, 0, 0);
+  }
+}
+
+@keyframes drift-twinkle {
+  to {
+    transform: translate3d(-1000px, 500px, 0);
+  }
+}
+
+@keyframes drift-clouds {
+  to {
+    transform: translate3d(900px, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .starfield__stars,
+  .starfield__twinkling,
+  .starfield__clouds {
+    animation: none;
+  }
+}
+
+/* ---------- header ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  height: var(--header-height);
+  background: color-mix(in srgb, var(--color-bg) 78%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  height: 100%;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-accent);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  letter-spacing: 0.02em;
+}
+
+.brand:hover {
+  color: var(--color-accent-hover);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.site-nav__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-full);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.site-nav__link:hover {
+  color: var(--color-text);
+  background: var(--color-surface-2);
+}
+
+.site-nav__link[aria-current='page'] {
+  color: var(--color-text);
+}
+
+.site-nav__user {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  padding-inline: var(--space-2);
+}
+
+@media (max-width: 479px) {
+  .brand__name,
+  .site-nav__user {
+    display: none;
+  }
+}
+
+/* ---------- footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding-block: var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-5);
+}
+
+.site-footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+}
+
+.site-footer__nav a,
+.link-button {
+  color: var(--color-text-muted);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  min-height: var(--tap);
+  display: inline-flex;
+  align-items: center;
+}
+
+.site-footer__nav a:hover,
+.link-button:hover {
+  color: var(--color-text);
+}
+
+.link-button {
+  font: inherit;
+}
+
+/* ---------- cookie banner ---------- */
+.cookie-banner {
+  position: fixed;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: calc(var(--playbar-height) + var(--space-3) + env(safe-area-inset-bottom, 0px));
+  z-index: var(--z-banner);
+  max-width: 720px;
+  margin-inline: auto;
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-2);
+}
+
+.cookie-banner__text {
+  flex: 1 1 320px;
+}
+
+.cookie-banner__text h2 {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  margin-bottom: var(--space-1);
+}
+
+.cookie-banner__text p {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.cookie-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+@media (max-width: 479px) {
+  .cookie-banner__actions {
+    width: 100%;
+  }
+
+  .cookie-banner__actions .btn {
+    flex: 1;
+  }
+}

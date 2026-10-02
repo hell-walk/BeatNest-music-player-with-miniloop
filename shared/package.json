@@ -1,0 +1,14 @@
+{
+  "name": "@beatnest/shared",
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js",
+    "./validation": "./src/validation/index.js",
+    "./routes": "./src/routes.js"
+  },
+  "dependencies": {
+    "zod": "^4.6.5"
+  }
+}

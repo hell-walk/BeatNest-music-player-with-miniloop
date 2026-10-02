@@ -1,0 +1,142 @@
+/* ---------- hero (home) ---------- */
+.hero {
+  padding-block: var(--space-6) var(--space-8);
+  max-width: 64ch;
+}
+
+.hero__eyebrow {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+}
+
+.hero__lead {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  margin-top: var(--space-4);
+}
+
+.hero__cta {
+  margin-top: var(--space-6);
+}
+
+.hero__error {
+  margin-top: var(--space-3);
+  color: var(--color-danger);
+  font-size: var(--text-sm);
+}
+
+/* ---------- two-column app layout ---------- */
+.home-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+}
+
+.home-grid__main h2 {
+  margin-bottom: var(--space-4);
+}
+
+@media (min-width: 1024px) {
+  /* library on the left (like v1), playlists on the right; DOM order keeps
+     playlists first for mobile and for screen readers */
+  .home-grid {
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .home-grid > .library {
+    order: -1;
+  }
+}
+
+/* ---------- playlist page ---------- */
+.playlist-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+  align-items: end;
+  margin-bottom: var(--space-6);
+}
+
+.playlist-hero__cover {
+  width: min(240px, 100%);
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-2);
+}
+
+@media (min-width: 640px) {
+  .playlist-hero {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+}
+
+.more-heading {
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-4);
+}
+
+/* ---------- auth pages ---------- */
+.auth-page {
+  display: grid;
+  place-items: center;
+}
+
+.auth-card {
+  width: min(420px, 100%);
+  padding: var(--space-6) var(--space-5);
+  background: color-mix(in srgb, var(--color-surface-1) 90%, transparent);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-2);
+  text-align: center;
+}
+
+.auth-card__logo {
+  margin-inline: auto;
+  color: var(--color-accent);
+}
+
+.auth-card h1 {
+  font-size: var(--text-2xl);
+  margin: var(--space-3) 0 var(--space-1);
+}
+
+.auth-card form {
+  margin-top: var(--space-5);
+}
+
+.auth-card__submit {
+  width: 100%;
+  margin-top: var(--space-2);
+}
+
+.auth-card__alt {
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* ---------- 404 ---------- */
+.not-found {
+  text-align: center;
+  padding-block: var(--space-8);
+  max-width: 48ch;
+  margin-inline: auto;
+}
+
+.not-found__code {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 15vw, 8rem);
+  line-height: 1;
+  color: var(--color-accent);
+}
+
+.not-found .btn {
+  margin-top: var(--space-5);
+}

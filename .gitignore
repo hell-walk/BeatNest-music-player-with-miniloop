@@ -1,0 +1,20 @@
+# dependencies
+node_modules/
+
+# build output
+client/dist/
+perf/
+
+# environment / secrets (only .env.example is committed)
+.env
+.env.*
+!.env.example
+
+# database files
+server/data/*.sqlite
+server/data/*.sqlite-*
+
+# misc
+*.log
+.DS_Store
+Thumbs.db

@@ -1,0 +1,137 @@
+.pgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .pgrid {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: var(--space-5);
+  }
+}
+
+.pgrid__alert {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* ---------- card ---------- */
+.pcard {
+  position: relative;
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--color-surface-1) 85%, transparent);
+  border: 1px solid var(--color-border);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition);
+}
+
+.pcard:hover,
+.pcard:focus-within {
+  transform: translateY(-3px);
+  border-color: var(--color-border-strong);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--glow) 60%, transparent), 0 12px 32px var(--glow);
+}
+
+.pcard.is-active {
+  border-color: var(--color-accent);
+}
+
+.pcard__link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+}
+
+.pcard__link:hover {
+  color: inherit;
+}
+
+.pcard__img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+}
+
+.pcard__title {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  font-weight: 600;
+  margin-top: var(--space-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pcard__desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-top: 2px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* play button sits over the bottom-right corner of the artwork */
+.pcard__play {
+  position: absolute;
+  right: var(--space-4);
+  top: calc(100% - 92px);
+  box-shadow: var(--shadow-2);
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.pcard:hover .pcard__play,
+.pcard:focus-within .pcard__play,
+.pcard.is-active .pcard__play,
+.pcard__play:focus-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* touch devices have no hover – always show the play button */
+@media (hover: none) {
+  .pcard__play {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- skeleton ---------- */
+.pcard--skeleton .pcard__img,
+.skeleton-line {
+  background: linear-gradient(90deg, var(--color-surface-2) 25%, var(--color-surface-3) 50%, var(--color-surface-2) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.skeleton-line {
+  height: 14px;
+  border-radius: 4px;
+  margin-top: var(--space-3);
+}
+
+.skeleton-line--short {
+  width: 60%;
+  margin-top: var(--space-2);
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}

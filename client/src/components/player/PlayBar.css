@@ -1,0 +1,223 @@
+.playbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-playbar);
+  min-height: var(--playbar-height);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: color-mix(in srgb, var(--color-surface-1) 92%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--color-border);
+}
+
+.playbar__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-4);
+  padding-block: var(--space-2) var(--space-3);
+}
+
+/* ---- info ---- */
+.playbar__info {
+  min-width: 0;
+}
+
+.playbar__title {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.playbar__artist {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.playbar__notice {
+  font-size: var(--text-xs);
+  color: var(--color-danger);
+  margin-top: 2px;
+}
+
+/* ---- controls ---- */
+.playbar__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+}
+
+.playbar[data-status='loading'] .playbar__play {
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* ---- extras ---- */
+.playbar__extras {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+/* ---- seek bar ---- */
+.seekbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--gutter) 0;
+  max-width: var(--content-max);
+  margin-inline: auto;
+}
+
+.seekbar__time {
+  font-variant-numeric: tabular-nums;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  min-width: 2.6em;
+  text-align: center;
+}
+
+/* ---- range inputs (seek + volume) ---- */
+.range {
+  --pct: 0%;
+  flex: 1;
+  width: 100%;
+  height: var(--tap);
+  margin: 0;
+  background: transparent;
+  appearance: none;
+  cursor: pointer;
+}
+
+.range:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    var(--color-accent) 0 var(--pct),
+    var(--color-border-strong) var(--pct) 100%
+  );
+}
+
+.range::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-border-strong);
+}
+
+.range::-moz-range-progress {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-accent);
+}
+
+.range::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: var(--color-text);
+  border: 0;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-text);
+  border: 0;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.range:hover::-webkit-slider-thumb,
+.range:focus-visible::-webkit-slider-thumb,
+.range:active::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+.range:hover::-moz-range-thumb,
+.range:focus-visible::-moz-range-thumb,
+.range:active::-moz-range-thumb {
+  opacity: 1;
+}
+
+.range:focus-visible {
+  outline-offset: -4px;
+}
+
+/* ---- volume ---- */
+.volume {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.volume .range {
+  width: 110px;
+  flex: none;
+}
+
+/* ---- responsive ---- */
+@media (max-width: 1023px) {
+  .playbar__inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'info extras'
+      'controls controls';
+    row-gap: var(--space-1);
+  }
+
+  .playbar__info {
+    grid-area: info;
+  }
+
+  .playbar__controls {
+    grid-area: controls;
+  }
+
+  .playbar__extras {
+    grid-area: extras;
+  }
+
+  :root {
+    --playbar-height: 172px;
+  }
+}
+
+@media (max-width: 639px) {
+  .volume {
+    display: none;
+  }
+
+  .playbar__miniloop span {
+    display: none;
+  }
+
+  .playbar__miniloop {
+    width: var(--tap);
+    padding: 0;
+  }
+}

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#07080c" />
+
+    <!--
+      Default metadata for crawlers that do not run JavaScript.
+      The server rewrites title/description/canonical/og:* per route when it
+      serves this file, and the React app keeps them in sync on navigation.
+    -->
+    <title>BeatNest – Free music player with Mini Loop</title>
+    <meta
+      name="description"
+      content="Stream curated playlists and build a Mini Loop of up to seven songs that repeat back to back. Free, fast and ad-free."
+    />
+    <link rel="canonical" href="https://beatnest.example.com/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="BeatNest" />
+    <meta property="og:title" content="BeatNest – Free music player with Mini Loop" />
+    <meta
+      property="og:description"
+      content="Stream curated playlists and build a Mini Loop of up to seven songs that repeat back to back. Free, fast and ad-free."
+    />
+    <meta property="og:url" content="https://beatnest.example.com/" />
+    <meta property="og:image" content="https://beatnest.example.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="BeatNest logo – headphones around a music note" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="BeatNest – Free music player with Mini Loop" />
+    <meta
+      name="twitter:description"
+      content="Stream curated playlists and build a Mini Loop of up to seven songs that repeat back to back."
+    />
+    <meta name="twitter:image" content="https://beatnest.example.com/og-image.png" />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@400;700&display=swap"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "BeatNest",
+        "url": "https://beatnest.example.com/",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "description": "Free music player with curated playlists and a Mini Loop feature.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <noscript>
+      <p style="padding: 1rem; font-family: system-ui, sans-serif">
+        BeatNest needs JavaScript to play music. Please enable it and reload the page.
+      </p>
+    </noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

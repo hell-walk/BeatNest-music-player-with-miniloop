@@ -1,0 +1,35 @@
+{
+  "name": "beatnest",
+  "private": true,
+  "version": "2.0.0",
+  "description": "BeatNest - a React + Express music player with Mini Loop",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "workspaces": [
+    "shared",
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n server,client -c blue,magenta \"npm run dev --workspace server\" \"npm run dev --workspace client\"",
+    "build": "npm run assets && npm run sitemap && npm run build --workspace client",
+    "start": "npm run start --workspace server",
+    "seed": "npm run seed --workspace server",
+    "test": "npm test --workspace server",
+    "lint": "npm run lint --workspace client",
+    "assets": "node scripts/optimize-images.mjs && node scripts/generate-icons.mjs",
+    "sitemap": "node scripts/generate-sitemap.mjs",
+    "check": "npm run check:secrets && npm run check:contrast && npm run check:links && npm run check:perf",
+    "check:secrets": "node scripts/check-secrets.mjs",
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "check:links": "node scripts/check-links.mjs",
+    "check:perf": "node scripts/perf-check.mjs"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5",
+    "sharp": "^0.35.5",
+    "@img/sharp-wasm32": "0.35.5"
+  }
+}
