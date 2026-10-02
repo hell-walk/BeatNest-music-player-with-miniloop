@@ -30,7 +30,7 @@ function extract(img) {
     weight += w;
   }
   if (!weight) return null;
-  return `rgba(${Math.round(r / weight)}, ${Math.round(g / weight)}, ${Math.round(b / weight)}, 0.55)`;
+  return `rgba(${Math.round(r / weight)}, ${Math.round(g / weight)}, ${Math.round(b / weight)}, 0.35)`;
 }
 
 /**

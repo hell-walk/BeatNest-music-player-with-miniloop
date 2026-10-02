@@ -43,6 +43,43 @@
   font-weight: 600;
 }
 
+/* ---------- mini loop reservoir (7 tape slots) ---------- */
+.reservoir {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.reservoir__slots {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-1);
+}
+
+.reservoir__slot {
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-3);
+  transition: background-color var(--transition);
+}
+
+.reservoir__slot.is-filled {
+  background: color-mix(in srgb, var(--color-accent) 55%, var(--color-surface-3));
+}
+
+.reservoir__slot.is-active {
+  background: var(--color-accent);
+  box-shadow: 0 0 10px var(--color-accent);
+}
+
+.reservoir__label {
+  font-family: var(--font-label, var(--font-body));
+  text-transform: var(--label-transform, none);
+  letter-spacing: var(--label-spacing, 0);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
 /* ---------- track list ---------- */
 .tracklist {
   display: flex;

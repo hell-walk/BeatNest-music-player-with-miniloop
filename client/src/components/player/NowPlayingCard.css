@@ -1,0 +1,128 @@
+.npc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-4) var(--space-3) var(--space-3);
+  border-radius: var(--radius-lg);
+  background: radial-gradient(
+    circle at 50% 30%,
+    color-mix(in srgb, var(--glow) 60%, transparent),
+    transparent 70%
+  );
+}
+
+/* ---- reel ---- */
+.npc__reel {
+  position: relative;
+  width: 132px;
+  height: 132px;
+  margin-bottom: var(--space-3);
+}
+
+.npc__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.npc__ring-track {
+  fill: none;
+  stroke: var(--color-surface-3);
+  stroke-width: 4;
+}
+
+.npc__ring-progress {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 4;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 400ms linear;
+}
+
+.npc__disc {
+  position: absolute;
+  inset: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--color-surface-2);
+  color: var(--color-accent);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), var(--shadow-1);
+}
+
+.npc__disc img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.85);
+}
+
+/* record-style spindle hole */
+.npc__hole {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  box-shadow: 0 0 0 3px var(--color-surface-2);
+}
+
+.npc.is-playing .npc__disc {
+  animation: npc-spin 14s linear infinite;
+}
+
+@keyframes npc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .npc.is-playing .npc__disc {
+    animation: none;
+  }
+}
+
+/* ---- text ---- */
+.npc__label {
+  font-family: var(--font-label, var(--font-body));
+  text-transform: var(--label-transform, none);
+  letter-spacing: var(--label-spacing, 0);
+  font-size: var(--text-xs);
+  color: var(--color-accent);
+  margin-bottom: var(--space-1);
+}
+
+.npc__title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  line-height: var(--leading-tight);
+  color: var(--color-text);
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.npc__artist {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.npc__time {
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+  font-variant-numeric: tabular-nums;
+  margin-top: var(--space-2);
+}
+
+.npc__note {
+  margin-top: var(--space-2);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}

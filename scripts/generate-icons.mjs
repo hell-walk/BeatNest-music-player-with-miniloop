@@ -12,8 +12,8 @@ const ROOT = path.resolve(import.meta.dirname, '..');
 const LOGO = path.join(ROOT, 'assets-src', 'logo.png');
 const OUT = path.join(ROOT, 'client', 'public');
 
-const BG = '#07080c';
-const ACCENT = '#2ee6e0';
+const BG = '#0e1119';
+const ACCENT = '#8fd6ca';
 
 /** Vector mark – same geometry as client/src/components/icons.jsx LogoMark. */
 const FAVICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">

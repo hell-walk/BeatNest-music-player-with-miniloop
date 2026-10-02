@@ -5,10 +5,9 @@
 }
 
 .hero__eyebrow {
-  font-size: var(--text-sm);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-lg);
   color: var(--color-accent);
   margin-bottom: var(--space-3);
 }
@@ -17,6 +16,7 @@
   font-size: var(--text-lg);
   color: var(--color-text-muted);
   margin-top: var(--space-4);
+  max-width: 52ch;
 }
 
 .hero__cta {

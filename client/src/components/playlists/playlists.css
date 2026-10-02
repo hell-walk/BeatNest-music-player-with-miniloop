@@ -23,8 +23,8 @@
   position: relative;
   padding: var(--space-3);
   border-radius: var(--radius-lg);
-  background: color-mix(in srgb, var(--color-surface-1) 85%, transparent);
-  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface-1) 80%, transparent);
+  border: 1px solid transparent;
   transition:
     transform var(--transition),
     box-shadow var(--transition),
@@ -33,13 +33,12 @@
 
 .pcard:hover,
 .pcard:focus-within {
-  transform: translateY(-3px);
-  border-color: var(--color-border-strong);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--glow) 60%, transparent), 0 12px 32px var(--glow);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px -8px var(--glow);
 }
 
 .pcard.is-active {
-  border-color: var(--color-accent);
+  border-color: color-mix(in srgb, var(--color-accent) 55%, transparent);
 }
 
 .pcard__link {

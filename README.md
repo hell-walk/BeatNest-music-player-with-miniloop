@@ -54,6 +54,18 @@ Copy `server/.env.example` to `server/.env`. The important ones:
 
 The client has **no secrets and no required env vars** (`client/.env.example`). Everything the browser needs comes from `GET /api/config`.
 
+## Themes
+
+Three themes, switched with the toggle in the navbar and remembered in `localStorage`:
+
+| Theme | Look | Fonts |
+| --- | --- | --- |
+| **Soothing** (default) | warm sand paper with a dotted "tape deck" grid, sage green | Newsreader italic + Plus Jakarta Sans, Space Mono micro-labels |
+| **Light** | crisp paper, white cards, forest green | Newsreader + Plus Jakarta Sans |
+| **Dark** | deep navy night sky with drifting stars, bright mint | Newsreader + Inter |
+
+All three are pure token overrides in `client/src/styles/tokens.css` (`:root[data-theme="…"]`); `client/public/theme-init.js` applies the saved theme before first paint. `npm run check:contrast` validates every text pair in every theme.
+
 ## Architecture notes
 
 - **Audio** is served from `server/media/music` by `express.static`, which implements HTTP Range requests (seeking works without downloading whole files).

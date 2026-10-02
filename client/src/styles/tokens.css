@@ -1,69 +1,86 @@
 /*
-  Design tokens. Every colour pair used for text is checked by
-  scripts/check-contrast.mjs against WCAG AA (4.5:1 normal, 3:1 large/UI).
+  Design tokens – three themes selected via <html data-theme="…">:
+    (default) soothing – "Tape deck": warm sand paper with a dotted grid, sage green,
+                         italic Newsreader headings, mono micro-labels. Calm by default.
+    light              – "Acoustic lab": crisp paper, white cards, forest green,
+                         Newsreader + Plus Jakarta Sans.
+    dark               – "Tranquil Audio Sanctuary": deep navy, bright mint,
+                         Newsreader + Inter.
+  scripts/check-contrast.mjs validates every text pair in every theme (WCAG AA).
 */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  /* surfaces */
-  --color-bg: #07080c;
-  --color-surface-1: #10121a;
-  --color-surface-2: #181b26;
-  --color-surface-3: #212534;
-  --color-border: #2a2f40;
-  --color-border-strong: #3a4057;
+  /* surfaces – warm sand paper */
+  --color-bg: #ede8dd;
+  --color-surface-1: #f6f3ec;
+  --color-surface-2: #e4ddce;
+  --color-surface-3: #d9d1bf;
+  --color-border: #d6cdba;
+  --color-border-strong: #bdb29c;
 
-  /* text */
-  --color-text: #eef0f6;
-  --color-text-muted: #a3a9ba;
-  --color-text-faint: #7d8497;
+  /* text – warm charcoal */
+  --color-text: #2e2b25;
+  --color-text-muted: #5f594e;
+  --color-text-faint: #655e52;
 
-  /* brand accent (cyan from the logo) */
-  --color-accent: #2ee6e0;
-  --color-accent-hover: #5df0eb;
-  --color-accent-press: #19c7c1;
-  --color-on-accent: #07080c;
+  /* accent – sage / tape-deck green */
+  --color-accent: #256453;
+  --color-accent-hover: #1f5546;
+  --color-accent-press: #194539;
+  --color-on-accent: #ffffff;
 
-  /* status */
-  --color-danger: #ff8080;
-  --color-danger-bg: #3a1518;
-  --color-success: #7ee2a8;
+  /* status – muted, never alarming */
+  --color-danger: #9c3b3b;
+  --color-danger-bg: #f3e0dc;
+  --color-success: #2a6f5c;
 
-  /* focus ring – deliberately not the accent so it stays visible on accent buttons */
-  --color-focus: #ffd166;
+  /* focus ring – burnt amber, distinct from the accent */
+  --color-focus: #8f4600;
 
   /* dynamic per-card glow, overridden inline from the cover's dominant colour */
-  --glow: rgba(46, 230, 224, 0.45);
+  --glow: rgba(42, 111, 92, 0.22);
+  --glow-alpha: 0.22;
+
+  /* backgrounds: starfield hidden, dotted paper grid shown */
+  --sky-opacity: 0;
+  --paper-dots: radial-gradient(var(--color-border-strong) 0.8px, transparent 0.9px);
+  --paper-dots-size: 22px 22px;
 
   /* type */
-  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-display: 'Bitcount Grid Double', var(--font-body);
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-label: 'Space Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  --display-weight: 500;
+  --display-style: italic;
+  --label-transform: uppercase;
+  --label-spacing: 0.08em;
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-md: 1rem;
   --text-lg: 1.125rem;
   --text-xl: 1.375rem;
   --text-2xl: 1.75rem;
-  --text-3xl: clamp(2rem, 4vw + 1rem, 3rem);
+  --text-3xl: clamp(2.25rem, 4vw + 1rem, 3.5rem);
   --leading-tight: 1.15;
-  --leading-normal: 1.5;
+  --leading-normal: 1.6;
 
-  /* spacing */
+  /* spacing – generous */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
   --space-5: 1.5rem;
   --space-6: 2rem;
-  --space-8: 3rem;
+  --space-8: 3.5rem;
 
-  /* shape */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
+  /* shape – soft */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
   --radius-full: 999px;
-  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-2: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-1: 0 1px 2px rgba(60, 50, 30, 0.08);
+  --shadow-2: 0 10px 28px rgba(60, 50, 30, 0.14);
 
   /* layering */
   --z-header: 20;
@@ -72,22 +89,104 @@
   --z-modal: 50;
 
   /* layout */
-  --header-height: 64px;
-  --playbar-height: 96px;
+  --header-height: 68px;
+  --playbar-height: 100px;
   --sidebar-width: 320px;
-  --content-max: 1280px;
+  --content-max: 1200px;
   --gutter: 16px;
 
-  /* motion */
-  --transition-fast: 150ms ease;
-  --transition: 250ms ease;
+  /* motion – unhurried */
+  --transition-fast: 200ms ease;
+  --transition: 400ms ease;
 
   /* minimum touch target */
   --tap: 44px;
 }
 
+/* ---------- light: crisp "acoustic lab" paper ---------- */
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --color-bg: #f5f2eb;
+  --color-surface-1: #fcfbf8;
+  --color-surface-2: #efeae0;
+  --color-surface-3: #e5dfd2;
+  --color-border: #e0d9cc;
+  --color-border-strong: #c4bba9;
+
+  --color-text: #2b2a26;
+  --color-text-muted: #5a564d;
+  --color-text-faint: #6b665b;
+
+  --color-accent: #176d52;
+  --color-accent-hover: #125a43;
+  --color-accent-press: #0e4a37;
+  --color-on-accent: #ffffff;
+
+  --color-danger: #9f3a3a;
+  --color-danger-bg: #f6e1de;
+  --color-success: #1f6e48;
+
+  --color-focus: #9a4a00;
+
+  --glow: rgba(27, 122, 92, 0.2);
+  --glow-alpha: 0.22;
+  --sky-opacity: 0;
+  --paper-dots: none;
+
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-label: var(--font-body);
+  --display-style: normal;
+  --label-transform: none;
+  --label-spacing: 0;
+  --radius-lg: 18px;
+}
+
+/* ---------- dark: "Tranquil Audio Sanctuary" navy ---------- */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-bg: #051424;
+  --color-surface-1: #0d1c2d;
+  --color-surface-2: #122131;
+  --color-surface-3: #1c2b3c;
+  --color-border: #1c2b3c;
+  --color-border-strong: #34475a;
+
+  --color-text: #d4e4fa;
+  --color-text-muted: #a3b5c6;
+  --color-text-faint: #8597aa;
+
+  --color-accent: #20e0b0;
+  --color-accent-hover: #51fdcb;
+  --color-accent-press: #19bf96;
+  --color-on-accent: #00382a;
+
+  --color-danger: #ffb4ab;
+  --color-danger-bg: #4a1a1f;
+  --color-success: #81ffd5;
+
+  --color-focus: #ffd166;
+
+  --glow: rgba(32, 224, 176, 0.35);
+  --glow-alpha: 0.45;
+  --sky-opacity: 1;
+  --paper-dots: none;
+
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-label: var(--font-body);
+  --display-style: normal;
+  --label-transform: none;
+  --label-spacing: 0;
+  --radius-lg: 18px;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-2: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
 @media (min-width: 768px) {
   :root {
-    --gutter: 24px;
+    --gutter: 28px;
   }
 }

@@ -16,7 +16,10 @@ html {
 
 body {
   min-height: 100dvh;
-  background: var(--color-bg);
+  background-color: var(--color-bg);
+  /* soothing theme: faint dotted "tape deck" paper grid; other themes set none */
+  background-image: var(--paper-dots, none);
+  background-size: var(--paper-dots-size, auto);
   color: var(--color-text);
   font-family: var(--font-body);
   font-size: var(--text-md);
@@ -72,10 +75,19 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: var(--display-weight, 500);
+  font-style: var(--display-style, normal);
   line-height: var(--leading-tight);
-  letter-spacing: 0.01em;
+  letter-spacing: -0.005em;
   text-wrap: balance;
+}
+
+/* small "tape label" text: mono + uppercase in the soothing theme, plain elsewhere */
+.label {
+  font-family: var(--font-label, var(--font-body));
+  text-transform: var(--label-transform, none);
+  letter-spacing: var(--label-spacing, 0);
+  font-size: var(--text-xs);
 }
 
 h1 {

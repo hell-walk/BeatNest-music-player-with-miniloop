@@ -4,8 +4,8 @@
   "description": "Free music player with Mini Loop",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#07080c",
-  "theme_color": "#07080c",
+  "background_color": "#0e1119",
+  "theme_color": "#0e1119",
   "icons": [
     {
       "src": "/icon-192.png",

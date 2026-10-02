@@ -1,7 +1,8 @@
-import { Link, NavLink } from 'react-router';
+import { Link } from 'react-router';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { LogoMark } from '../icons.jsx';
 import Button from '../ui/Button.jsx';
+import ThemeSwitcher from './ThemeSwitcher.jsx';
 
 export default function Header() {
   const { user, status, logout } = useAuth();
@@ -15,9 +16,7 @@ export default function Header() {
         </Link>
 
         <nav className="site-nav" aria-label="Primary">
-          <NavLink to="/" end className="site-nav__link">
-            Home
-          </NavLink>
+          <ThemeSwitcher />
 
           {status === 'authed' ? (
             <>

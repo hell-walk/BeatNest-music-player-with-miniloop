@@ -1,29 +1,56 @@
+import { useConfig } from '../../context/ConfigContext.jsx';
 import { usePlayer } from '../../context/PlayerContext.jsx';
+import NowPlayingCard from '../player/NowPlayingCard.jsx';
 import Button from '../ui/Button.jsx';
 import TrackList from './TrackList.jsx';
 import './library.css';
 
-/** Sidebar with the loaded library (current source) and the upcoming queue. */
+/** Seven "tape slots": filled for each song in the loop, the current one lit. */
+function LoopReservoir({ count, max, activeIndex }) {
+  return (
+    <div className="reservoir">
+      <ol className="reservoir__slots" aria-label={`${count} of ${max} Mini Loop slots filled`}>
+        {Array.from({ length: max }, (_, i) => (
+          <li
+            key={i}
+            className={`reservoir__slot${i < count ? ' is-filled' : ''}${i === activeIndex ? ' is-active' : ''}`}
+            aria-hidden="true"
+          />
+        ))}
+      </ol>
+      <span className="reservoir__label">
+        {count} of {max} slots filled
+      </span>
+    </div>
+  );
+}
+
+/** Sidebar with the now-playing reel, the loaded library and the upcoming queue. */
 export default function LibraryPanel() {
   const { source, tracks, queue, currentTrackIndex, isPlaying, miniLoop, hasSource, actions } = usePlayer();
+  const { miniLoopMax } = useConfig();
+  const isLoop = source?.type === 'miniloop';
 
   return (
     <aside className="library" aria-label="Library and queue">
+      <NowPlayingCard />
+
       <section className="library__section" aria-labelledby="library-heading">
         <div className="library__head">
-          <h2 id="library-heading">Your Library</h2>
+          <h2 id="library-heading">{isLoop ? 'Mini Loop' : 'Your Library'}</h2>
           {hasSource && (
             <Button variant="ghost" size="sm" onClick={actions.clearLibrary}>
               Clear
             </Button>
           )}
         </div>
-        {source && (
+        {source && !isLoop && (
           <p className="library__source">
-            {source.type === 'miniloop' ? 'Mini Loop' : source.title}
+            {source.title}
             <span className="text-muted"> · {tracks.length} songs</span>
           </p>
         )}
+        {isLoop && <LoopReservoir count={tracks.length} max={miniLoopMax} activeIndex={currentTrackIndex} />}
         <TrackList
           tracks={tracks}
           currentTrackIndex={currentTrackIndex}

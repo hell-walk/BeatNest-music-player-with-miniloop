@@ -128,6 +128,19 @@ function MiniLoopForm({ tracks, loadError, onClose }) {
         </Button>
       </header>
 
+      {/* ordered "tape slots" – the loop plays in this order and wraps back to 01 */}
+      <ol className="loop-ribbon" aria-label={`${selected.length} of ${miniLoopMax} slots filled`}>
+        {Array.from({ length: miniLoopMax }, (_, i) => {
+          const track = tracks?.find((t) => t.id === selected[i]);
+          return (
+            <li key={i} className={`loop-ribbon__slot${track ? ' is-filled' : ''}`}>
+              <span className="loop-ribbon__num">{String(i + 1).padStart(2, '0')}</span>
+              <span className="loop-ribbon__title">{track ? track.title : 'Empty'}</span>
+            </li>
+          );
+        })}
+      </ol>
+
       <div className="miniloop-modal__body">
         {loadError && <Alert tone="error">Could not load songs: {loadError}</Alert>}
         {!loadError && !tracks && (
@@ -154,6 +167,11 @@ function MiniLoopForm({ tracks, loadError, onClose }) {
                       />
                       <span className="miniloop-option__title">{track.title}</span>
                       <span className="miniloop-option__artist">{track.artist}</span>
+                      {checked && (
+                        <span className="miniloop-option__slot">
+                          Slot {String(selected.indexOf(track.id) + 1).padStart(2, '0')}
+                        </span>
+                      )}
                     </label>
                   </li>
                 );

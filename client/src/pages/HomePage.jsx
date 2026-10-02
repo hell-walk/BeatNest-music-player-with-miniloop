@@ -43,11 +43,11 @@ export default function HomePage() {
   return (
     <div className="page container">
       <section className="hero" aria-labelledby="hero-title">
-        <p className="hero__eyebrow">Free · No ads · No account needed</p>
-        <h1 id="hero-title">Your playlists, on loop.</h1>
+        <p className="hero__eyebrow">Free, quiet, no ads.</p>
+        <h1 id="hero-title">Press play. Breathe out.</h1>
         <p className="hero__lead">
-          Stream seven hand-picked playlists, then build a <strong>Mini Loop</strong> – up to seven songs that
-          play back to back, for as long as you like.
+          Seven gentle playlists and a <strong>Mini Loop</strong> – up to seven songs that repeat for as long
+          as you need them to.
         </p>
         <div className="hero__cta">
           <Button

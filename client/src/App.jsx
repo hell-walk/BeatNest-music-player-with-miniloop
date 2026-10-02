@@ -5,6 +5,7 @@ import { AuthProvider } from './context/AuthContext.jsx';
 import { ConfigProvider } from './context/ConfigContext.jsx';
 import { ConsentProvider } from './context/ConsentContext.jsx';
 import { PlayerProvider } from './context/PlayerContext.jsx';
+import { ThemeProvider } from './context/ThemeContext.jsx';
 import { usePageViews } from './hooks/useMetrics.js';
 import HomePage from './pages/HomePage.jsx';
 
@@ -35,14 +36,16 @@ function AppRoutes() {
 
 export default function App() {
   return (
-    <ConfigProvider>
-      <ConsentProvider>
-        <AuthProvider>
-          <PlayerProvider>
-            <AppRoutes />
-          </PlayerProvider>
-        </AuthProvider>
-      </ConsentProvider>
-    </ConfigProvider>
+    <ThemeProvider>
+      <ConfigProvider>
+        <ConsentProvider>
+          <AuthProvider>
+            <PlayerProvider>
+              <AppRoutes />
+            </PlayerProvider>
+          </AuthProvider>
+        </ConsentProvider>
+      </ConfigProvider>
+    </ThemeProvider>
   );
 }

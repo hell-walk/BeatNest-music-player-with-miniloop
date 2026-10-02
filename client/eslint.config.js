@@ -27,7 +27,10 @@ export default [
       // a deliberate, common pattern; Fast Refresh still works for the component.
       'react-refresh/only-export-components': [
         'warn',
-        { allowConstantExport: true, allowExportNames: ['useAuth', 'useConfig', 'useConsent', 'usePlayer', 'usePlayerTime', 'describedBy'] },
+        {
+          allowConstantExport: true,
+          allowExportNames: ['useAuth', 'useConfig', 'useConsent', 'usePlayer', 'usePlayerTime', 'useTheme', 'THEMES', 'describedBy'],
+        },
       ],
     },
   },
